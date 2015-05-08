@@ -1,0 +1,4 @@
+in lib;
+out fil;
+fil = $("lib value");
+uir = $(" lib[ id='ab56' ] livro:first[ qualidade='boa' ] ");
