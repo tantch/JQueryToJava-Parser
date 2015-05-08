@@ -39,7 +39,7 @@ output returns[String s]:
 exp:
 ter=STRING EQS OPENXP exp1 CLOSEXP ENDL 
  |
-STRING EQS OPENXP exp1 CLOSEXP ENDL prev=exp 
+ter1=STRING EQS OPENXP exp1 CLOSEXP ENDL prev=exp 
 ;
 
 exp1:
