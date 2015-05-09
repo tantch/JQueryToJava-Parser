@@ -33,8 +33,15 @@ public class MyListener extends HelloBaseListener {
 		
 	}
 	
-	@Override public void enterExp(HelloParser.ExpContext ctx) { 
-		if(!ctx.ter.getText().equals(out) || !ctx.ter.getText().equals(out))
+	@Override public void enterExp(HelloParser.ExpContext ctx) {
+		System.out.println(out);
+		System.out.println(ctx.ter.getText());
+		System.out.println(ctx.exp1().ter.getText());
+		System.out.println(in);
+		if(!ctx.exp1().ter.getText().equals(in)){
+			System.out.println("'in' expression doesn't match! Should be '" + in + "' but is '" + ctx.exp1().ter.getText() + "'");			
+		}
+		if(!ctx.ter.getText().equals(out))
 			System.out.println("'out' expression doesn't match! Should be '" + out + "' but is '" + ctx.ter.getText() + "'");
 	}
 	
@@ -43,8 +50,7 @@ public class MyListener extends HelloBaseListener {
 	}
 	
 	@Override public void enterExp1(HelloParser.Exp1Context ctx) { 
-		if(!ctx.STRING().getText().equals(in))
-			System.out.println("'in' expression doesn't match! Should be '" + in + "' but is '" + ctx.STRING().getText() + "'");
+		
 	}
 	
 	@Override public void exitExp1(HelloParser.Exp1Context ctx) { 

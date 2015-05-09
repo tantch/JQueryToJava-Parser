@@ -42,8 +42,8 @@ ter=STRING EQS OPENXP exp1 CLOSEXP ENDL
 ter=STRING EQS OPENXP exp1 CLOSEXP ENDL prev=exp 
 ;
 
-exp1:
-(ALL | STRING) (psel | braexp)? SEP? exp1?
+exp1 returns[String v]:
+(ALL | ter=STRING) (psel | braexp)? SEP? exp1? {$v=$ter.text;}
 ;
 braexp:
 OPENB STRING ops DELIMITER STRING DELIMITER CLOSEB (psel | braexp)?
