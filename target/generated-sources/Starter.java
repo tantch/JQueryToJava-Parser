@@ -22,7 +22,7 @@ public class Starter {
 		ParserRuleContext tree = parser.start(); // parse
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 														
-		MyListener extractor = new MyListener();
+		MyListener extractor = new MyListener(parser);
 		walker.walk(extractor, tree); // initiate walk of tree with listener
 	}
 

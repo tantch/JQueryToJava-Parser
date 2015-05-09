@@ -25,7 +25,7 @@ WS: [ \t\n\r]+ -> skip ;
 //PARSER
 ops: OP | EQS;
 
-start: input output exp EOF 
+start: input output exp EOF {}
 ;
 
 input returns[String v]:

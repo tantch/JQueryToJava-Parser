@@ -1,12 +1,17 @@
 
 public class MyListener extends HelloBaseListener {
-	
-	public MyListener(){
-		
+	private HelloParser parser;
+	public MyListener(HelloParser parser){
+		this.parser=parser;
 	}
 	
 	@Override public void enterStart(HelloParser.StartContext ctx) {
-		System.out.println("hehehe");
+
+		
+	}
+	@Override public void exitStart(HelloParser.StartContext ctx) {
+
+
 	}
 
 
