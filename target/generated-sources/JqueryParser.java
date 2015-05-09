@@ -1,4 +1,4 @@
-// Generated from Hello.g4 by ANTLR 4.5
+// Generated from Jquery.g4 by ANTLR 4.5
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class HelloParser extends Parser {
+public class JqueryParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.5", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -20,10 +20,10 @@ public class HelloParser extends Parser {
 		STRING=10, ENDL=11, DELIMITER=12, EQS=13, SEP=14, PSS=15, PPS=16, OPENXP=17, 
 		CLOSEXP=18, WS=19;
 	public static final int
-		RULE_ops = 0, RULE_start = 1, RULE_input = 2, RULE_output = 3, RULE_exp = 4, 
-		RULE_exp1 = 5, RULE_braexp = 6, RULE_psel = 7;
+		RULE_ops = 0, RULE_start = 1, RULE_input = 2, RULE_output = 3, RULE_line = 4, 
+		RULE_exp = 5, RULE_exp1 = 6, RULE_braexp = 7, RULE_psel = 8;
 	public static final String[] ruleNames = {
-		"ops", "start", "input", "output", "exp", "exp1", "braexp", "psel"
+		"ops", "start", "input", "output", "line", "exp", "exp1", "braexp", "psel"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -69,7 +69,7 @@ public class HelloParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Hello.g4"; }
+	public String getGrammarFileName() { return "Jquery.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -80,24 +80,24 @@ public class HelloParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public HelloParser(TokenStream input) {
+	public JqueryParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class OpsContext extends ParserRuleContext {
-		public TerminalNode OP() { return getToken(HelloParser.OP, 0); }
-		public TerminalNode EQS() { return getToken(HelloParser.EQS, 0); }
+		public TerminalNode OP() { return getToken(JqueryParser.OP, 0); }
+		public TerminalNode EQS() { return getToken(JqueryParser.EQS, 0); }
 		public OpsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ops; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterOps(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterOps(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitOps(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitOps(this);
 		}
 	}
 
@@ -108,7 +108,7 @@ public class HelloParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(16);
+			setState(18);
 			_la = _input.LA(1);
 			if ( !(_la==OP || _la==EQS) ) {
 			_errHandler.recoverInline(this);
@@ -129,27 +129,21 @@ public class HelloParser extends Parser {
 	}
 
 	public static class StartContext extends ParserRuleContext {
-		public InputContext input() {
-			return getRuleContext(InputContext.class,0);
+		public LineContext line() {
+			return getRuleContext(LineContext.class,0);
 		}
-		public OutputContext output() {
-			return getRuleContext(OutputContext.class,0);
-		}
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
-		}
-		public TerminalNode EOF() { return getToken(HelloParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(JqueryParser.EOF, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterStart(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitStart(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitStart(this);
 		}
 	}
 
@@ -159,15 +153,10 @@ public class HelloParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(18);
-			input();
-			setState(19);
-			output();
 			setState(20);
-			exp();
+			line();
 			setState(21);
 			match(EOF);
-
 			}
 		}
 		catch (RecognitionException re) {
@@ -182,22 +171,20 @@ public class HelloParser extends Parser {
 	}
 
 	public static class InputContext extends ParserRuleContext {
-		public String v;
-		public Token STRING;
-		public TerminalNode IN() { return getToken(HelloParser.IN, 0); }
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public TerminalNode ENDL() { return getToken(HelloParser.ENDL, 0); }
+		public TerminalNode IN() { return getToken(JqueryParser.IN, 0); }
+		public TerminalNode STRING() { return getToken(JqueryParser.STRING, 0); }
+		public TerminalNode ENDL() { return getToken(JqueryParser.ENDL, 0); }
 		public InputContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_input; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterInput(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterInput(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitInput(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitInput(this);
 		}
 	}
 
@@ -207,13 +194,12 @@ public class HelloParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(24);
+			setState(23);
 			match(IN);
+			setState(24);
+			match(STRING);
 			setState(25);
-			((InputContext)_localctx).STRING = match(STRING);
-			setState(26);
 			match(ENDL);
-			((InputContext)_localctx).v = (((InputContext)_localctx).STRING!=null?((InputContext)_localctx).STRING.getText():null);
 			}
 		}
 		catch (RecognitionException re) {
@@ -228,22 +214,20 @@ public class HelloParser extends Parser {
 	}
 
 	public static class OutputContext extends ParserRuleContext {
-		public String s;
-		public Token STRING;
-		public TerminalNode OUT() { return getToken(HelloParser.OUT, 0); }
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public TerminalNode ENDL() { return getToken(HelloParser.ENDL, 0); }
+		public TerminalNode OUT() { return getToken(JqueryParser.OUT, 0); }
+		public TerminalNode STRING() { return getToken(JqueryParser.STRING, 0); }
+		public TerminalNode ENDL() { return getToken(JqueryParser.ENDL, 0); }
 		public OutputContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_output; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterOutput(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterOutput(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitOutput(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitOutput(this);
 		}
 	}
 
@@ -253,13 +237,109 @@ public class HelloParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(29);
+			setState(27);
 			match(OUT);
-			setState(30);
-			((OutputContext)_localctx).STRING = match(STRING);
-			setState(31);
+			setState(28);
+			match(STRING);
+			setState(29);
 			match(ENDL);
-			((OutputContext)_localctx).s = (((OutputContext)_localctx).STRING!=null?((OutputContext)_localctx).STRING.getText():null);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class LineContext extends ParserRuleContext {
+		public InputContext input() {
+			return getRuleContext(InputContext.class,0);
+		}
+		public LineContext line() {
+			return getRuleContext(LineContext.class,0);
+		}
+		public OutputContext output() {
+			return getRuleContext(OutputContext.class,0);
+		}
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public LineContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_line; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterLine(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitLine(this);
+		}
+	}
+
+	public final LineContext line() throws RecognitionException {
+		LineContext _localctx = new LineContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_line);
+		int _la;
+		try {
+			setState(43);
+			switch (_input.LA(1)) {
+			case IN:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(31);
+				input();
+				setState(33);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IN) | (1L << OUT) | (1L << STRING))) != 0)) {
+					{
+					setState(32);
+					line();
+					}
+				}
+
+				}
+				break;
+			case OUT:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(35);
+				output();
+				setState(37);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IN) | (1L << OUT) | (1L << STRING))) != 0)) {
+					{
+					setState(36);
+					line();
+					}
+				}
+
+				}
+				break;
+			case STRING:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(39);
+				exp();
+				setState(41);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IN) | (1L << OUT) | (1L << STRING))) != 0)) {
+					{
+					setState(40);
+					line();
+					}
+				}
+
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -275,74 +355,46 @@ public class HelloParser extends Parser {
 
 	public static class ExpContext extends ParserRuleContext {
 		public Token ter;
-		public ExpContext prev;
-		public TerminalNode EQS() { return getToken(HelloParser.EQS, 0); }
-		public TerminalNode OPENXP() { return getToken(HelloParser.OPENXP, 0); }
+		public TerminalNode EQS() { return getToken(JqueryParser.EQS, 0); }
+		public TerminalNode OPENXP() { return getToken(JqueryParser.OPENXP, 0); }
 		public Exp1Context exp1() {
 			return getRuleContext(Exp1Context.class,0);
 		}
-		public TerminalNode CLOSEXP() { return getToken(HelloParser.CLOSEXP, 0); }
-		public TerminalNode ENDL() { return getToken(HelloParser.ENDL, 0); }
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
-		}
+		public TerminalNode CLOSEXP() { return getToken(JqueryParser.CLOSEXP, 0); }
+		public TerminalNode ENDL() { return getToken(JqueryParser.ENDL, 0); }
+		public TerminalNode STRING() { return getToken(JqueryParser.STRING, 0); }
 		public ExpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterExp(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterExp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitExp(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitExp(this);
 		}
 	}
 
 	public final ExpContext exp() throws RecognitionException {
 		ExpContext _localctx = new ExpContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_exp);
+		enterRule(_localctx, 10, RULE_exp);
 		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(45);
+			((ExpContext)_localctx).ter = match(STRING);
+			setState(46);
+			match(EQS);
+			setState(47);
+			match(OPENXP);
+			setState(48);
+			exp1();
 			setState(49);
-			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(34);
-				((ExpContext)_localctx).ter = match(STRING);
-				setState(35);
-				match(EQS);
-				setState(36);
-				match(OPENXP);
-				setState(37);
-				exp1();
-				setState(38);
-				match(CLOSEXP);
-				setState(39);
-				match(ENDL);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(41);
-				((ExpContext)_localctx).ter = match(STRING);
-				setState(42);
-				match(EQS);
-				setState(43);
-				match(OPENXP);
-				setState(44);
-				exp1();
-				setState(45);
-				match(CLOSEXP);
-				setState(46);
-				match(ENDL);
-				setState(47);
-				((ExpContext)_localctx).prev = exp();
-				}
-				break;
+			match(CLOSEXP);
+			setState(50);
+			match(ENDL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -359,15 +411,15 @@ public class HelloParser extends Parser {
 	public static class Exp1Context extends ParserRuleContext {
 		public String v;
 		public Token ter;
-		public TerminalNode ALL() { return getToken(HelloParser.ALL, 0); }
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
+		public TerminalNode ALL() { return getToken(JqueryParser.ALL, 0); }
+		public TerminalNode STRING() { return getToken(JqueryParser.STRING, 0); }
 		public PselContext psel() {
 			return getRuleContext(PselContext.class,0);
 		}
 		public BraexpContext braexp() {
 			return getRuleContext(BraexpContext.class,0);
 		}
-		public TerminalNode SEP() { return getToken(HelloParser.SEP, 0); }
+		public TerminalNode SEP() { return getToken(JqueryParser.SEP, 0); }
 		public Exp1Context exp1() {
 			return getRuleContext(Exp1Context.class,0);
 		}
@@ -377,50 +429,50 @@ public class HelloParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_exp1; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterExp1(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterExp1(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitExp1(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitExp1(this);
 		}
 	}
 
 	public final Exp1Context exp1() throws RecognitionException {
 		Exp1Context _localctx = new Exp1Context(_ctx, getState());
-		enterRule(_localctx, 10, RULE_exp1);
+		enterRule(_localctx, 12, RULE_exp1);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(54);
 			switch (_input.LA(1)) {
 			case ALL:
 				{
-				setState(51);
+				setState(52);
 				match(ALL);
 				}
 				break;
 			case STRING:
 				{
-				setState(52);
+				setState(53);
 				((Exp1Context)_localctx).ter = match(STRING);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(57);
+			setState(58);
 			switch (_input.LA(1)) {
 			case PSS:
 			case PPS:
 				{
-				setState(55);
+				setState(56);
 				psel();
 				}
 				break;
 			case OPENB:
 				{
-				setState(56);
+				setState(57);
 				braexp();
 				}
 				break;
@@ -432,20 +484,20 @@ public class HelloParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(60);
+			setState(61);
 			_la = _input.LA(1);
 			if (_la==SEP) {
 				{
-				setState(59);
+				setState(60);
 				match(SEP);
 				}
 			}
 
-			setState(63);
+			setState(64);
 			_la = _input.LA(1);
 			if (_la==ALL || _la==STRING) {
 				{
-				setState(62);
+				setState(63);
 				exp1();
 				}
 			}
@@ -465,19 +517,19 @@ public class HelloParser extends Parser {
 	}
 
 	public static class BraexpContext extends ParserRuleContext {
-		public TerminalNode OPENB() { return getToken(HelloParser.OPENB, 0); }
-		public List<TerminalNode> STRING() { return getTokens(HelloParser.STRING); }
+		public TerminalNode OPENB() { return getToken(JqueryParser.OPENB, 0); }
+		public List<TerminalNode> STRING() { return getTokens(JqueryParser.STRING); }
 		public TerminalNode STRING(int i) {
-			return getToken(HelloParser.STRING, i);
+			return getToken(JqueryParser.STRING, i);
 		}
 		public OpsContext ops() {
 			return getRuleContext(OpsContext.class,0);
 		}
-		public List<TerminalNode> DELIMITER() { return getTokens(HelloParser.DELIMITER); }
+		public List<TerminalNode> DELIMITER() { return getTokens(JqueryParser.DELIMITER); }
 		public TerminalNode DELIMITER(int i) {
-			return getToken(HelloParser.DELIMITER, i);
+			return getToken(JqueryParser.DELIMITER, i);
 		}
-		public TerminalNode CLOSEB() { return getToken(HelloParser.CLOSEB, 0); }
+		public TerminalNode CLOSEB() { return getToken(JqueryParser.CLOSEB, 0); }
 		public PselContext psel() {
 			return getRuleContext(PselContext.class,0);
 		}
@@ -490,46 +542,46 @@ public class HelloParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_braexp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterBraexp(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterBraexp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitBraexp(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitBraexp(this);
 		}
 	}
 
 	public final BraexpContext braexp() throws RecognitionException {
 		BraexpContext _localctx = new BraexpContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_braexp);
+		enterRule(_localctx, 14, RULE_braexp);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67);
-			match(OPENB);
 			setState(68);
-			match(STRING);
+			match(OPENB);
 			setState(69);
-			ops();
-			setState(70);
-			match(DELIMITER);
-			setState(71);
 			match(STRING);
-			setState(72);
+			setState(70);
+			ops();
+			setState(71);
 			match(DELIMITER);
+			setState(72);
+			match(STRING);
 			setState(73);
+			match(DELIMITER);
+			setState(74);
 			match(CLOSEB);
-			setState(76);
+			setState(77);
 			switch (_input.LA(1)) {
 			case PSS:
 			case PPS:
 				{
-				setState(74);
+				setState(75);
 				psel();
 				}
 				break;
 			case OPENB:
 				{
-				setState(75);
+				setState(76);
 				braexp();
 				}
 				break;
@@ -555,54 +607,54 @@ public class HelloParser extends Parser {
 	}
 
 	public static class PselContext extends ParserRuleContext {
-		public TerminalNode PSS() { return getToken(HelloParser.PSS, 0); }
+		public TerminalNode PSS() { return getToken(JqueryParser.PSS, 0); }
 		public PselContext psel() {
 			return getRuleContext(PselContext.class,0);
 		}
 		public BraexpContext braexp() {
 			return getRuleContext(BraexpContext.class,0);
 		}
-		public TerminalNode PPS() { return getToken(HelloParser.PPS, 0); }
-		public TerminalNode OPENP() { return getToken(HelloParser.OPENP, 0); }
-		public TerminalNode STRING() { return getToken(HelloParser.STRING, 0); }
-		public TerminalNode CLOSEP() { return getToken(HelloParser.CLOSEP, 0); }
+		public TerminalNode PPS() { return getToken(JqueryParser.PPS, 0); }
+		public TerminalNode OPENP() { return getToken(JqueryParser.OPENP, 0); }
+		public TerminalNode STRING() { return getToken(JqueryParser.STRING, 0); }
+		public TerminalNode CLOSEP() { return getToken(JqueryParser.CLOSEP, 0); }
 		public PselContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_psel; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).enterPsel(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).enterPsel(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HelloListener ) ((HelloListener)listener).exitPsel(this);
+			if ( listener instanceof JqueryListener ) ((JqueryListener)listener).exitPsel(this);
 		}
 	}
 
 	public final PselContext psel() throws RecognitionException {
 		PselContext _localctx = new PselContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_psel);
+		enterRule(_localctx, 16, RULE_psel);
 		try {
-			setState(91);
+			setState(92);
 			switch (_input.LA(1)) {
 			case PSS:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(78);
+				setState(79);
 				match(PSS);
-				setState(81);
+				setState(82);
 				switch (_input.LA(1)) {
 				case PSS:
 				case PPS:
 					{
-					setState(79);
+					setState(80);
 					psel();
 					}
 					break;
 				case OPENB:
 					{
-					setState(80);
+					setState(81);
 					braexp();
 					}
 					break;
@@ -619,26 +671,26 @@ public class HelloParser extends Parser {
 			case PPS:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(83);
-				match(PPS);
 				setState(84);
-				match(OPENP);
+				match(PPS);
 				setState(85);
-				match(STRING);
+				match(OPENP);
 				setState(86);
+				match(STRING);
+				setState(87);
 				match(CLOSEP);
-				setState(89);
+				setState(90);
 				switch (_input.LA(1)) {
 				case PSS:
 				case PPS:
 					{
-					setState(87);
+					setState(88);
 					psel();
 					}
 					break;
 				case OPENB:
 					{
-					setState(88);
+					setState(89);
 					braexp();
 					}
 					break;
@@ -668,30 +720,30 @@ public class HelloParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\25`\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\64\n\6\3\7\3\7\5\78\n\7"+
-		"\3\7\3\7\5\7<\n\7\3\7\5\7?\n\7\3\7\5\7B\n\7\3\7\3\7\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\3\b\3\b\5\bO\n\b\3\t\3\t\3\t\5\tT\n\t\3\t\3\t\3\t\3\t\3\t\3"+
-		"\t\5\t\\\n\t\5\t^\n\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\3\4\2\4\4\17\17d\2"+
-		"\22\3\2\2\2\4\24\3\2\2\2\6\32\3\2\2\2\b\37\3\2\2\2\n\63\3\2\2\2\f\67\3"+
-		"\2\2\2\16E\3\2\2\2\20]\3\2\2\2\22\23\t\2\2\2\23\3\3\2\2\2\24\25\5\6\4"+
-		"\2\25\26\5\b\5\2\26\27\5\n\6\2\27\30\7\2\2\3\30\31\b\3\1\2\31\5\3\2\2"+
-		"\2\32\33\7\n\2\2\33\34\7\f\2\2\34\35\7\r\2\2\35\36\b\4\1\2\36\7\3\2\2"+
-		"\2\37 \7\13\2\2 !\7\f\2\2!\"\7\r\2\2\"#\b\5\1\2#\t\3\2\2\2$%\7\f\2\2%"+
-		"&\7\17\2\2&\'\7\23\2\2\'(\5\f\7\2()\7\24\2\2)*\7\r\2\2*\64\3\2\2\2+,\7"+
-		"\f\2\2,-\7\17\2\2-.\7\23\2\2./\5\f\7\2/\60\7\24\2\2\60\61\7\r\2\2\61\62"+
-		"\5\n\6\2\62\64\3\2\2\2\63$\3\2\2\2\63+\3\2\2\2\64\13\3\2\2\2\658\7\t\2"+
-		"\2\668\7\f\2\2\67\65\3\2\2\2\67\66\3\2\2\28;\3\2\2\29<\5\20\t\2:<\5\16"+
-		"\b\2;9\3\2\2\2;:\3\2\2\2;<\3\2\2\2<>\3\2\2\2=?\7\20\2\2>=\3\2\2\2>?\3"+
-		"\2\2\2?A\3\2\2\2@B\5\f\7\2A@\3\2\2\2AB\3\2\2\2BC\3\2\2\2CD\b\7\1\2D\r"+
-		"\3\2\2\2EF\7\7\2\2FG\7\f\2\2GH\5\2\2\2HI\7\16\2\2IJ\7\f\2\2JK\7\16\2\2"+
-		"KN\7\b\2\2LO\5\20\t\2MO\5\16\b\2NL\3\2\2\2NM\3\2\2\2NO\3\2\2\2O\17\3\2"+
-		"\2\2PS\7\21\2\2QT\5\20\t\2RT\5\16\b\2SQ\3\2\2\2SR\3\2\2\2ST\3\2\2\2T^"+
-		"\3\2\2\2UV\7\22\2\2VW\7\5\2\2WX\7\f\2\2X[\7\6\2\2Y\\\5\20\t\2Z\\\5\16"+
-		"\b\2[Y\3\2\2\2[Z\3\2\2\2[\\\3\2\2\2\\^\3\2\2\2]P\3\2\2\2]U\3\2\2\2^\21"+
-		"\3\2\2\2\13\63\67;>ANS[]";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\25a\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\3"+
+		"\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\6\3\6\5\6$\n\6\3\6\3\6\5\6"+
+		"(\n\6\3\6\3\6\5\6,\n\6\5\6.\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\5"+
+		"\b9\n\b\3\b\3\b\5\b=\n\b\3\b\5\b@\n\b\3\b\5\bC\n\b\3\b\3\b\3\t\3\t\3\t"+
+		"\3\t\3\t\3\t\3\t\3\t\3\t\5\tP\n\t\3\n\3\n\3\n\5\nU\n\n\3\n\3\n\3\n\3\n"+
+		"\3\n\3\n\5\n]\n\n\5\n_\n\n\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\3\4\2\4\4"+
+		"\17\17h\2\24\3\2\2\2\4\26\3\2\2\2\6\31\3\2\2\2\b\35\3\2\2\2\n-\3\2\2\2"+
+		"\f/\3\2\2\2\168\3\2\2\2\20F\3\2\2\2\22^\3\2\2\2\24\25\t\2\2\2\25\3\3\2"+
+		"\2\2\26\27\5\n\6\2\27\30\7\2\2\3\30\5\3\2\2\2\31\32\7\n\2\2\32\33\7\f"+
+		"\2\2\33\34\7\r\2\2\34\7\3\2\2\2\35\36\7\13\2\2\36\37\7\f\2\2\37 \7\r\2"+
+		"\2 \t\3\2\2\2!#\5\6\4\2\"$\5\n\6\2#\"\3\2\2\2#$\3\2\2\2$.\3\2\2\2%\'\5"+
+		"\b\5\2&(\5\n\6\2\'&\3\2\2\2\'(\3\2\2\2(.\3\2\2\2)+\5\f\7\2*,\5\n\6\2+"+
+		"*\3\2\2\2+,\3\2\2\2,.\3\2\2\2-!\3\2\2\2-%\3\2\2\2-)\3\2\2\2.\13\3\2\2"+
+		"\2/\60\7\f\2\2\60\61\7\17\2\2\61\62\7\23\2\2\62\63\5\16\b\2\63\64\7\24"+
+		"\2\2\64\65\7\r\2\2\65\r\3\2\2\2\669\7\t\2\2\679\7\f\2\28\66\3\2\2\28\67"+
+		"\3\2\2\29<\3\2\2\2:=\5\22\n\2;=\5\20\t\2<:\3\2\2\2<;\3\2\2\2<=\3\2\2\2"+
+		"=?\3\2\2\2>@\7\20\2\2?>\3\2\2\2?@\3\2\2\2@B\3\2\2\2AC\5\16\b\2BA\3\2\2"+
+		"\2BC\3\2\2\2CD\3\2\2\2DE\b\b\1\2E\17\3\2\2\2FG\7\7\2\2GH\7\f\2\2HI\5\2"+
+		"\2\2IJ\7\16\2\2JK\7\f\2\2KL\7\16\2\2LO\7\b\2\2MP\5\22\n\2NP\5\20\t\2O"+
+		"M\3\2\2\2ON\3\2\2\2OP\3\2\2\2P\21\3\2\2\2QT\7\21\2\2RU\5\22\n\2SU\5\20"+
+		"\t\2TR\3\2\2\2TS\3\2\2\2TU\3\2\2\2U_\3\2\2\2VW\7\22\2\2WX\7\5\2\2XY\7"+
+		"\f\2\2Y\\\7\6\2\2Z]\5\22\n\2[]\5\20\t\2\\Z\3\2\2\2\\[\3\2\2\2\\]\3\2\2"+
+		"\2]_\3\2\2\2^Q\3\2\2\2^V\3\2\2\2_\23\3\2\2\2\16#\'+-8<?BOT\\^";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

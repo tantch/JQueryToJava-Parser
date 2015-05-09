@@ -1,4 +1,4 @@
-// Generated from Hello.g4 by ANTLR 4.5
+// Generated from Jquery.g4 by ANTLR 4.5
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -6,107 +6,119 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link HelloListener},
+ * This class provides an empty implementation of {@link JqueryListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class HelloBaseListener implements HelloListener {
+public class JqueryBaseListener implements JqueryListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOps(HelloParser.OpsContext ctx) { }
+	@Override public void enterOps(JqueryParser.OpsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOps(HelloParser.OpsContext ctx) { }
+	@Override public void exitOps(JqueryParser.OpsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStart(HelloParser.StartContext ctx) { }
+	@Override public void enterStart(JqueryParser.StartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStart(HelloParser.StartContext ctx) { }
+	@Override public void exitStart(JqueryParser.StartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInput(HelloParser.InputContext ctx) { }
+	@Override public void enterInput(JqueryParser.InputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInput(HelloParser.InputContext ctx) { }
+	@Override public void exitInput(JqueryParser.InputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOutput(HelloParser.OutputContext ctx) { }
+	@Override public void enterOutput(JqueryParser.OutputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOutput(HelloParser.OutputContext ctx) { }
+	@Override public void exitOutput(JqueryParser.OutputContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExp(HelloParser.ExpContext ctx) { }
+	@Override public void enterLine(JqueryParser.LineContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExp(HelloParser.ExpContext ctx) { }
+	@Override public void exitLine(JqueryParser.LineContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExp1(HelloParser.Exp1Context ctx) { }
+	@Override public void enterExp(JqueryParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExp1(HelloParser.Exp1Context ctx) { }
+	@Override public void exitExp(JqueryParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBraexp(HelloParser.BraexpContext ctx) { }
+	@Override public void enterExp1(JqueryParser.Exp1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBraexp(HelloParser.BraexpContext ctx) { }
+	@Override public void exitExp1(JqueryParser.Exp1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPsel(HelloParser.PselContext ctx) { }
+	@Override public void enterBraexp(JqueryParser.BraexpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPsel(HelloParser.PselContext ctx) { }
+	@Override public void exitBraexp(JqueryParser.BraexpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPsel(JqueryParser.PselContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPsel(JqueryParser.PselContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -1,67 +1,66 @@
+import java.util.ArrayList;
 
-public class MyListener extends HelloBaseListener {
+
+public class MyListener extends JqueryBaseListener {
 
 	
-	private int cnt;
-	private String in, out;
+	private ArrayList<String> in, out;
 	
 	public MyListener(){
+		in = new ArrayList<String>();
+		out = new ArrayList<String>();
 		
 	}
 	
-	@Override public void enterStart(HelloParser.StartContext ctx) {
+	@Override public void enterStart(JqueryParser.StartContext ctx) {
 		
 	}
 	
-	@Override public void exitStart(HelloParser.StartContext ctx) {
+	@Override public void exitStart(JqueryParser.StartContext ctx) {
 		
 	}
 
-	@Override public void enterInput(HelloParser.InputContext ctx) { 
-		in = ctx.STRING.getText();
+	@Override public void enterInput(JqueryParser.InputContext ctx) { 
+		in.add(ctx.STRING().getText());
 		
 	}
 	
-	@Override public void exitInput(HelloParser.InputContext ctx) { 
+	@Override public void exitInput(JqueryParser.InputContext ctx) { 
 	}
 	
-	@Override public void enterOutput(HelloParser.OutputContext ctx) { 
-		out = ctx.STRING.getText();
+	@Override public void enterOutput(JqueryParser.OutputContext ctx) { 
+		out.add(ctx.STRING().getText());
 	}
 	
-	@Override public void exitOutput(HelloParser.OutputContext ctx) { 
+	@Override public void exitOutput(JqueryParser.OutputContext ctx) { 
 		
 	}
 	
-	@Override public void enterExp(HelloParser.ExpContext ctx) {
-		System.out.println(out);
-		System.out.println(ctx.ter.getText());
-		System.out.println(ctx.exp1().ter.getText());
-		System.out.println(in);
-		if(!ctx.exp1().ter.getText().equals(in)){
-			System.out.println("'in' expression doesn't match! Should be '" + in + "' but is '" + ctx.exp1().ter.getText() + "'");			
+	@Override public void enterExp(JqueryParser.ExpContext ctx) {
+		if(!in.contains(ctx.exp1().ter.getText()) ){
+			System.out.println("Input variable " + ctx.exp1().ter.getText() + " was not declared" );			
 		}
-		if(!ctx.ter.getText().equals(out))
-			System.out.println("'out' expression doesn't match! Should be '" + out + "' but is '" + ctx.ter.getText() + "'");
+		if(!out.contains(ctx.ter.getText()))
+			System.out.println("Output variable " + ctx.ter.getText() + " was not declared" );			
 	}
 	
-	@Override public void exitExp(HelloParser.ExpContext ctx) { 
+	@Override public void exitExp(JqueryParser.ExpContext ctx) { 
 		
 	}
 	
-	@Override public void enterExp1(HelloParser.Exp1Context ctx) { 
+	@Override public void enterExp1(JqueryParser.Exp1Context ctx) { 
 		
 	}
 	
-	@Override public void exitExp1(HelloParser.Exp1Context ctx) { 
+	@Override public void exitExp1(JqueryParser.Exp1Context ctx) { 
 		
 	}
 	
-	@Override public void enterBraexp(HelloParser.BraexpContext ctx) {
+	@Override public void enterBraexp(JqueryParser.BraexpContext ctx) {
 		
 	}
 
-	@Override public void exitBraexp(HelloParser.BraexpContext ctx) {
+	@Override public void exitBraexp(JqueryParser.BraexpContext ctx) {
 		
 	}
 }

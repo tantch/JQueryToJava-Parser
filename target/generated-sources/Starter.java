@@ -16,9 +16,9 @@ public class Starter {
 		InputStream is = System.in;
 		if(inputFile != null) is = new FileInputStream(inputFile);
 		ANTLRInputStream input = new ANTLRInputStream(is);
-		HelloLexer lexer = new HelloLexer(input);
+		JqueryLexer lexer = new JqueryLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		HelloParser parser = new HelloParser(tokens);
+		JqueryParser parser = new JqueryParser(tokens);
 		ParserRuleContext tree = parser.start(); // parse
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 														
