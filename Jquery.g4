@@ -37,11 +37,6 @@ CLOSEB
 	']'
 ;
 
-ALL
-:
-	'*'
-;
-
 IN
 :
 	'in'
@@ -121,7 +116,6 @@ ops
 start
 :
 	line EOF
-
 ;
 
 input
@@ -148,10 +142,7 @@ exp
 
 exp1 returns [String v]
 :
-	(
-		ALL
-		| ter = STRING
-	)
+	ter = STRING
 	(
 		psel
 		| braexp

@@ -1,4 +1,11 @@
 in lib;
 out fil;
 fil = $("hyu value");
+in hyu;
+fil = $("hyu value");
+hyu = $("lib value");
+out hyu;
+hyu = $("lib value");
+fil = $("hyu value");
+lib = $("lib value");
 uir = $(" lib[ id='ab56' ] livro:first[ qualidade='boa' ] ");

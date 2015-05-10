@@ -20,6 +20,7 @@ public class Starter {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		JqueryParser parser = new JqueryParser(tokens);
 		ParserRuleContext tree = parser.start(); // parse
+		System.out.println(tree.toStringTree(parser)); // print LISP-style tree
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 														
 		MyListener extractor = new MyListener();
