@@ -1,5 +1,4 @@
-->@jQ
-in lib ;
+in lib;
 out fil;
 fil = $("hyu value");
 in hyu;
@@ -10,4 +9,3 @@ hyu = $("lib value");
 fil = $("hyu value");
 lib = $("lib value");
 uir = $(" lib[ id='ab56' ] livro:first[ qualidade='boa' ] ");
-<-
