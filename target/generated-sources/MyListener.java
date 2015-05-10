@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyListener extends JqueryBaseListener {
+public class MyListener extends JqueryParserBaseListener {
 
 	private HashMap<String, InOutVar> vars;
 	private int curLine;
