@@ -1,5 +1,9 @@
 in lib;
 out fil;
-fil = $(" lib value > next ");
-fil = $(" lib[ id = ' ab56' ] livro:first [ qualidade='boa' ] ");
-fil = $(" lib autor:first name:not(luis) ");
+out aut;
+fil = $(" lib book ");
+in fil;
+aut = $(" fil autor name:not(luis)");
+in libPub;
+out filPub;
+filPub = $("libPub book ");

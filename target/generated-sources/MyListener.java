@@ -18,7 +18,14 @@ public class MyListener extends JqueryBaseListener {
 
 	@Override
 	public void exitStart(JqueryParser.StartContext ctx) {
+		vars.forEach((k,v) -> printIfNotUsed(k,v));
+	}
 
+	private void printIfNotUsed(String k, InOutVar v) {
+		
+		if(!v.isUsed()){
+			System.out.println("Var " + k + " is never used after last declaration");
+		}
 	}
 
 	@Override
