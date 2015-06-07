@@ -1666,41 +1666,27 @@ line
 
 exp
 :
-	ter = STRING EQS OPENXP exp1 CLOSEXP ENDL
+	ter = STRING EQS OPENXP exp1* CLOSEXP ENDL
 ;
 
-exp1 returns [String v]
+exp1
 :
-	ter = STRING
+	SEP? ter = STRING
 	(
 		psel
 		| braexp
-	)? SEP? exp1?
-	{$v=$ter.text;}
-
+	)*
 ;
 
 braexp
 :
 	OPENB STRING ops DELIMITER STRING DELIMITER CLOSEB
-	(
-		psel
-		| braexp
-	)?
 ;
 
 psel
 :
 	PSS
-	(
-		psel
-		| braexp
-	)?
 	| PPS OPENP STRING CLOSEP
-	(
-		psel
-		| braexp
-	)?
 ;
 
 

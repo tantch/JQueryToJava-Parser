@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+
 public class MyListener extends JavaParserBaseListener {
 	private HashMap<String, InOutVar> vars;
 	private HashMap<String, Variable> currentLocalVars;
@@ -20,6 +22,30 @@ public class MyListener extends JavaParserBaseListener {
 
 	private Block currentBlock() {
 		return Starter.representation.get(Starter.representation.size() - 1);
+	}
+
+	private StoreDeclaration currentStoreDeclaration() {
+		return (StoreDeclaration) currentBlock().getDeclarations().get(
+				currentBlock().getDeclarations().size() - 1);
+	}
+
+	private Selector currentSelector() {
+		return currentStoreDeclaration().getSelectors().get(
+				currentStoreDeclaration().getSelectors().size() - 1);
+	}
+
+	private Variable getVar(String nm) {
+		if (currentLocalVars.containsKey(nm)) {
+			return currentLocalVars.get(nm);
+		}
+		if (classVars.containsKey(nm)) {
+			return classVars.get(nm);
+
+		}
+		if (argumentVars.containsKey(nm)) {
+			return argumentVars.get(nm);
+		}
+		return null;
 	}
 
 	// JAVA PART
@@ -263,7 +289,6 @@ public class MyListener extends JavaParserBaseListener {
 		try {
 
 			String nm = ctx.STRING().getText();
-
 			Variable var = null;
 			if (currentLocalVars.containsKey(nm)) {
 				if (currentLocalVars.get(nm).isArrayList()) {
@@ -350,19 +375,26 @@ public class MyListener extends JavaParserBaseListener {
 	@Override
 	public void enterExp(JavaParser.ExpContext ctx) {
 		try {
-			if (!vars.containsKey(ctx.exp1().ter.getText())) {
-				System.out.println("Input variable " + ctx.exp1().ter.getText()
+
+			Variable var = null;
+			Variable inVar = null;
+			Variable outVar = null;
+			StoreDeclaration dec = null;
+			if (!vars.containsKey(ctx.exp1(0).ter.getText())) {
+				System.out.println("Input variable "
+						+ ctx.exp1(0).ter.getText()
 						+ " was not declared.Error in Line "
-						+ ctx.exp1().ter.getLine());
+						+ ctx.exp1(0).ter.getLine());
 				errors++;
-			} else if (!vars.get(ctx.exp1().ter.getText()).isInput()) {
-				System.out.println("Input variable " + ctx.exp1().ter.getText()
+			} else if (!vars.get(ctx.exp1(0).ter.getText()).isInput()) {
+				System.out.println("Input variable "
+						+ ctx.exp1(0).ter.getText()
 						+ " was declared as an output var.Error in Line "
-						+ ctx.exp1().ter.getLine());
+						+ ctx.exp1(0).ter.getLine());
 				errors++;
 			} else {
-
-				vars.get(ctx.exp1().ter.getText()).setAsUsed();
+				inVar = getVar(ctx.exp1(0).ter.getText());
+				vars.get(ctx.exp1(0).ter.getText()).setAsUsed();
 			}
 			if (!vars.containsKey(ctx.ter.getText())) {
 				System.out.println("Output variable " + ctx.ter.getText()
@@ -376,6 +408,7 @@ public class MyListener extends JavaParserBaseListener {
 				errors++;
 
 			} else {
+				outVar = getVar(ctx.ter.getText());
 				if (vars.get(ctx.ter.getText()).isFull()) {
 					System.out.println("Warning in Line " + ctx.ter.getLine()
 							+ " . Previous value of var " + ctx.ter.getText()
@@ -385,6 +418,9 @@ public class MyListener extends JavaParserBaseListener {
 				vars.get(ctx.ter.getText()).setAsUsed();
 				vars.get(ctx.ter.getText()).setAsFull();
 			}
+			dec = new StoreDeclaration(outVar, inVar);
+			currentBlock().addDeclaration(dec);
+
 		} catch (NullPointerException e) {
 			System.out.println("semantic step aborted because of sintax error");
 			return;
@@ -393,26 +429,54 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void exitExp(JavaParser.ExpContext ctx) {
-
 	}
-
+	
 	@Override
 	public void enterExp1(JavaParser.Exp1Context ctx) {
+		try {
+			String name = ctx.STRING().getText();
+			Selector sel = new Selector(name);
+			if (ctx.SEP() != null) {
+				sel.setPrevSeparator(ctx.SEP().getText());
+			}
+			currentStoreDeclaration().addSelector(sel);
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
+		}
 
 	}
+
 
 	@Override
-	public void exitExp1(JavaParser.Exp1Context ctx) {
-
-	}
+	public void enterPsel(JavaParser.PselContext ctx) {
+		try {
+			FunctionCondition cnd=null;
+			if(ctx.PSS()!= null){
+			}
+			else{
+				cnd= new FunctionCondition(ctx.PPS().getText(), ctx.STRING().getText());				
+			}
+			currentSelector().addCondition(cnd);
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
+		}
+	};
+	
 
 	@Override
 	public void enterBraexp(JavaParser.BraexpContext ctx) {
-
+		try {
+			BrackCondition cnd=null;
+			
+			cnd= new BrackCondition(ctx.STRING(0).getText(),ctx.STRING(1).getText(), ctx.ops().getText());
+			
+			currentSelector().addCondition(cnd);
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
+		}
 	}
 
-	@Override
-	public void exitBraexp(JavaParser.BraexpContext ctx) {
-
-	}
 }
