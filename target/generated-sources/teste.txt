@@ -37,7 +37,8 @@ class Test {
 	public static void main(String[] args,String nome,ArrayList<Books> libPub) {
 	
 		ArrayList<Books> lib = agrs[0];
-		String autor ;
+		ArrayList<Books> fil = new ArrayList<Books>();
+		String autor;
 		@->JQ
 		in lib; 
 		out fil;

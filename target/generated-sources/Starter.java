@@ -1,16 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -22,6 +14,7 @@ public class Starter{
 	
 
 	static TreeViewer viewr;
+	static ArrayList<Block> representation;
 	private static boolean syntaxErrors=false;
 	public static void main(String[] args) throws IOException {
 
@@ -60,12 +53,15 @@ public class Starter{
 		// tree
 		ParseTreeWalker walker = new ParseTreeWalker(); // create standard
 														// walker
-
+		representation= new ArrayList<Block>();
 		MyListener extractor = new MyListener();
 		
 		
 		walker.walk(extractor, tree); // initiate walk of tree with listener
-
+		
+		for (Block block : representation) {
+			block.print();
+		}
 	}
 	public static void SyntaxError() {
 		syntaxErrors=true;

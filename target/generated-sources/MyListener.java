@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyListener extends JavaParserBaseListener {
@@ -15,6 +16,10 @@ public class MyListener extends JavaParserBaseListener {
 		argumentVars = new HashMap<String, Variable>();
 		errors = 0;
 		warnings = 0;
+	}
+
+	private Block currentBlock() {
+		return Starter.representation.get(Starter.representation.size() - 1);
 	}
 
 	// JAVA PART
@@ -100,12 +105,13 @@ public class MyListener extends JavaParserBaseListener {
 				}
 			}
 
-			String mainClass = ctx.lastFormalParameter().formalParameter().unannType()
-					.unannReferenceType().unannClassOrInterfaceType()
+			String mainClass = ctx.lastFormalParameter().formalParameter()
+					.unannType().unannReferenceType()
+					.unannClassOrInterfaceType()
 					.unannClassType_lfno_unannClassOrInterfaceType().getText();
 
-			String varName = ctx.lastFormalParameter().formalParameter().variableDeclaratorId()
-					.getText();
+			String varName = ctx.lastFormalParameter().formalParameter()
+					.variableDeclaratorId().getText();
 			boolean initialized = true;
 
 			String classType = mainClass.split("<|>")[0];
@@ -128,6 +134,7 @@ public class MyListener extends JavaParserBaseListener {
 	public void enterMethodDeclaration(JavaParser.MethodDeclarationContext ctx) {
 		classVars = new HashMap<String, Variable>();
 		argumentVars = new HashMap<String, Variable>();
+		vars = new HashMap<String, InOutVar>();
 	};
 
 	@Override
@@ -138,7 +145,8 @@ public class MyListener extends JavaParserBaseListener {
 	// JQUERY PART
 	@Override
 	public void enterStart(JavaParser.StartContext ctx) {
-
+		Starter.representation.add(new Block(ctx.JQUERYBEGIN().getSymbol()
+				.getLine(), ctx.JQUERYEND().getSymbol().getLine()));
 	}
 
 	@Override
@@ -164,35 +172,85 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void enterInput(JavaParser.InputContext ctx) {
-		String nm = ctx.STRING().getText();
-		if (vars.containsKey(nm)) {
-			InOutVar temp = vars.get(nm);
-			if (temp.isInput()) {
-				System.out.println("Warning in line "
-						+ ctx.STRING().getSymbol().getLine() + "; Var " + nm
-						+ "was already declared as an in variable ");
-				warnings++;
+		try {
+
+			String nm = ctx.STRING().getText();
+			Variable var = null;
+			if (currentLocalVars.containsKey(nm)) {
+				if (currentLocalVars.get(nm).isArrayList()) {
+					var = currentLocalVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
+
+			} else if (classVars.containsKey(nm)) {
+				if (classVars.get(nm).isArrayList()) {
+					var = classVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
+
+			} else if (argumentVars.containsKey(nm)) {
+				if (argumentVars.get(nm).isArrayList()) {
+					var = argumentVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
 
 			} else {
-				if (!temp.isUsed()) {
+				System.out.println("Error. Variable was not declared on line: "
+						+ ctx.STRING().getSymbol().getLine());
+				errors++;
+			}
+			LoadVariableDeclaration inpDec;
+			if (vars.containsKey(nm)) {
+				InOutVar temp = vars.get(nm);
+				if (temp.isInput()) {
+					inpDec = new LoadVariableDeclaration(
+							DeclarationType.REDECLARATION, nm);
 					System.out.println("Warning in line "
 							+ ctx.STRING().getSymbol().getLine() + "; Var "
-							+ nm
-							+ "was never used since the previous declaration");
+							+ nm + "was already declared as an in variable ");
 					warnings++;
 
 				} else {
-					if (temp.isFull()) {
-						temp.setAsEmpty();
-					}
-					temp.setAsInput();
-				}
-			}
-		} else {
+					inpDec = new LoadVariableDeclaration(DeclarationType.REUSE,
+							nm);
+					if (!temp.isUsed()) {
+						System.out
+								.println("Warning in line "
+										+ ctx.STRING().getSymbol().getLine()
+										+ "; Var "
+										+ nm
+										+ "was never used since the previous declaration");
+						warnings++;
 
-			InOutVar temp = new InOutVar(nm);
-			temp.setAsInput();
-			vars.put(temp.getName(), temp);
+					} else {
+						if (temp.isFull()) {
+							temp.setAsEmpty();
+						}
+						temp.setAsInput();
+					}
+				}
+			} else {
+				inpDec = new LoadVariableDeclaration(DeclarationType.NEW, nm);
+				InOutVar temp = new InOutVar(nm);
+				temp.setAsInput();
+				vars.put(temp.getName(), temp);
+			}
+
+			inpDec.setVar(var);
+			currentBlock().addDeclaration(inpDec);
+
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
 		}
 	}
 
@@ -202,32 +260,85 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void enterOutput(JavaParser.OutputContext ctx) {
-		String nm = ctx.STRING().getText();
-		if (vars.containsKey(nm)) {
-			InOutVar temp = vars.get(nm);
-			if (temp.isOutput()) {
-				System.out.println("Warning in line "
-						+ ctx.STRING().getSymbol().getLine() + "; Var " + nm
-						+ "was already declared as an out variable ");
-				warnings++;
+		try {
+
+			String nm = ctx.STRING().getText();
+
+			Variable var = null;
+			if (currentLocalVars.containsKey(nm)) {
+				if (currentLocalVars.get(nm).isArrayList()) {
+					var = currentLocalVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
+
+			} else if (classVars.containsKey(nm)) {
+				if (classVars.get(nm).isArrayList()) {
+					var = classVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
+
+			} else if (argumentVars.containsKey(nm)) {
+				if (argumentVars.get(nm).isArrayList()) {
+					var = argumentVars.get(nm);
+				} else {
+					System.out
+							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
+									+ ctx.STRING().getSymbol().getLine());
+				}
 
 			} else {
-				if (!temp.isUsed()) {
+				System.out.println("Error. Variable was not declared on line: "
+						+ ctx.STRING().getSymbol().getLine());
+				errors++;
+			}
+			StoreVariableDeclaration outDec;
+
+			if (vars.containsKey(nm)) {
+				InOutVar temp = vars.get(nm);
+				if (temp.isOutput()) {
+					outDec = new StoreVariableDeclaration(
+							DeclarationType.REDECLARATION, nm);
 					System.out.println("Warning in line "
 							+ ctx.STRING().getSymbol().getLine() + "; Var "
-							+ nm
-							+ "was never used since the previous declaration");
+							+ nm + "was already declared as an out variable ");
 					warnings++;
 
 				} else {
-					temp.setAsOutput();
-				}
-			}
-		} else {
+					outDec = new StoreVariableDeclaration(
+							DeclarationType.REUSE, nm);
 
-			InOutVar temp = new InOutVar(nm);
-			temp.setAsOutput();
-			vars.put(temp.getName(), temp);
+					if (!temp.isUsed()) {
+						System.out
+								.println("Warning in line "
+										+ ctx.STRING().getSymbol().getLine()
+										+ "; Var "
+										+ nm
+										+ "was never used since the previous declaration");
+						warnings++;
+
+					} else {
+						temp.setAsOutput();
+					}
+				}
+			} else {
+				outDec = new StoreVariableDeclaration(DeclarationType.NEW, nm);
+
+				InOutVar temp = new InOutVar(nm);
+				temp.setAsOutput();
+				vars.put(temp.getName(), temp);
+			}
+
+			outDec.setVar(var);
+			currentBlock().addDeclaration(outDec);
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
 		}
 	}
 
@@ -238,41 +349,46 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void enterExp(JavaParser.ExpContext ctx) {
-		if (!vars.containsKey(ctx.exp1().ter.getText())) {
-			System.out.println("Input variable " + ctx.exp1().ter.getText()
-					+ " was not declared.Error in Line "
-					+ ctx.exp1().ter.getLine());
-			errors++;
-		} else if (!vars.get(ctx.exp1().ter.getText()).isInput()) {
-			System.out.println("Input variable " + ctx.exp1().ter.getText()
-					+ " was declared as an output var.Error in Line "
-					+ ctx.exp1().ter.getLine());
-			errors++;
-		} else {
+		try {
+			if (!vars.containsKey(ctx.exp1().ter.getText())) {
+				System.out.println("Input variable " + ctx.exp1().ter.getText()
+						+ " was not declared.Error in Line "
+						+ ctx.exp1().ter.getLine());
+				errors++;
+			} else if (!vars.get(ctx.exp1().ter.getText()).isInput()) {
+				System.out.println("Input variable " + ctx.exp1().ter.getText()
+						+ " was declared as an output var.Error in Line "
+						+ ctx.exp1().ter.getLine());
+				errors++;
+			} else {
 
-			vars.get(ctx.exp1().ter.getText()).setAsUsed();
-		}
-		if (!vars.containsKey(ctx.ter.getText())) {
-			System.out.println("Output variable " + ctx.ter.getText()
-					+ " was not declared.Error in Line " + ctx.ter.getLine());
-			errors++;
-		} else if (!vars.get(ctx.ter.getText()).isOutput()) {
-			System.out.println("Output variable " + ctx.ter.getText()
-					+ " was declared as an input var.Error in Line "
-					+ ctx.ter.getLine());
-			errors++;
-
-		} else {
-			if (vars.get(ctx.ter.getText()).isFull()) {
-				System.out.println("Warning in Line " + ctx.ter.getLine()
-						+ " . Previous value of var " + ctx.ter.getText()
-						+ " was never used");
-				warnings++;
+				vars.get(ctx.exp1().ter.getText()).setAsUsed();
 			}
-			vars.get(ctx.ter.getText()).setAsUsed();
-			vars.get(ctx.ter.getText()).setAsFull();
-		}
+			if (!vars.containsKey(ctx.ter.getText())) {
+				System.out.println("Output variable " + ctx.ter.getText()
+						+ " was not declared.Error in Line "
+						+ ctx.ter.getLine());
+				errors++;
+			} else if (!vars.get(ctx.ter.getText()).isOutput()) {
+				System.out.println("Output variable " + ctx.ter.getText()
+						+ " was declared as an input var.Error in Line "
+						+ ctx.ter.getLine());
+				errors++;
 
+			} else {
+				if (vars.get(ctx.ter.getText()).isFull()) {
+					System.out.println("Warning in Line " + ctx.ter.getLine()
+							+ " . Previous value of var " + ctx.ter.getText()
+							+ " was never used");
+					warnings++;
+				}
+				vars.get(ctx.ter.getText()).setAsUsed();
+				vars.get(ctx.ter.getText()).setAsFull();
+			}
+		} catch (NullPointerException e) {
+			System.out.println("semantic step aborted because of sintax error");
+			return;
+		}
 	}
 
 	@Override

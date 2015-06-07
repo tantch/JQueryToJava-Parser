@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Variable {
 	private String name;
@@ -8,7 +7,7 @@ public class Variable {
 
 	public Variable(String name, String mainClass, boolean initialized) {
 		this.name = name;
-		String classType = mainClass.split("<|>")[0];
+		classType = mainClass.split("<|>")[0];
 		if (mainClass.split("<|>").length > 2) {
 			genericType = mainClass.split("<|>")[1];
 		}
@@ -17,6 +16,13 @@ public class Variable {
 		System.out.println("created a variable with name : " + name
 				+ " of class " + classType + " with initialized: "
 				+ initialized);
+	}
+
+	public boolean isArrayList(){
+		return classType.equals("ArrayList");
+	}
+	public boolean isString(){
+		return classType.equals("String");
 	}
 
 }
