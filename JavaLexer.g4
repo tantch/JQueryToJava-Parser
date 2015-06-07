@@ -1,6 +1,5 @@
 lexer grammar JavaLexer;
 
-
 ABSTRACT
 :
 	'abstract'
@@ -676,14 +675,19 @@ QUESTION
 	'?'
 ;
 
+DEV
+:
+	'--'
+;
+
 COLON
 :
 	':'
 ;
 
-DOT
+ELIPSIS
 :
-	'.'
+	'...'
 ;
 
 EQUAL
@@ -899,4 +903,121 @@ COMMENT
 LINE_COMMENT
 :
 	'//' ~[\r\n]* -> skip
+;
+
+//OUR WORK IS THIS PART
+
+JQUERYBEGIN
+:
+	'@->JQ' -> pushMode ( JQUERY )
+;
+
+mode JQUERY;
+
+JQUERYEND
+:
+	'@<-JQ' -> popMode
+;
+
+NUM
+:
+	[0-9]+
+;
+
+OP
+:
+	'|='
+	| '*='
+	| '~='
+	| '$='
+	| '!='
+	| '^='
+;
+
+OPENP
+:
+	'('
+;
+
+CLOSEP
+:
+	')'
+;
+
+OPENB
+:
+	'['
+;
+
+CLOSEB
+:
+	']'
+;
+
+IN
+:
+	'in'
+;
+
+OUT
+:
+	'out'
+;
+
+STRING
+:
+	[a-zA-z] [a-zA-Z0-9]+
+;
+
+ENDL
+:
+	';'
+;
+
+DELIMITER
+:
+	'\''
+;
+
+EQS
+:
+	'='
+;
+
+SEP
+:
+	'>'
+	| '~'
+;
+
+PSS
+:
+	':even'
+	| ':first'
+	| ':odd'
+	| ':last'
+;
+
+PPS
+:
+	':not'
+	| ':contains'
+	| ':eq'
+	| ':lt'
+	| ':gt'
+;
+
+OPENXP
+:
+	'$("'
+;
+
+CLOSEXP
+:
+	'")'
+;
+
+WSJQ
+:
+	[ \t\n\r]+ -> skip
 ;

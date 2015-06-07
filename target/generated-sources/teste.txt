@@ -1,0 +1,53 @@
+
+import org.antlr.v4.runtime.ANTLRFileStream;
+import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.DiagnosticErrorListener;
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.atn.LexerATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionMode;
+
+import java.io.File;
+import java.lang.System;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+
+
+class Test {
+//	public static long lexerTime = 0;
+	public static boolean profile = false;
+	public static boolean notree = false;
+	public static boolean gui = false;
+	public static boolean printTree = false;
+	public static boolean SLL = false;
+	public static ArrayList<Books> books;
+	
+	public static Worker[] workers = new Worker[3];
+	static int windex = 0;
+
+	public static CyclicBarrier barrier;
+
+	public static volatile boolean firstPassDone = false;
+	
+	
+
+	public static void main(String[] args,String nome,ArrayList<Books> libPub) {
+	
+		ArrayList<Books> lib = agrs[0];
+		String autor ;
+		@->JQ
+		in lib; 
+		out fil;
+		out aut;
+		fil = $(" lib book "); 
+		in fil;
+		aut = $(" fil book autor name:not(luis)");
+		in libPub;
+		out filPub;
+		filPub = $("libPub book ");
+		@<-JQ
+	}
+}

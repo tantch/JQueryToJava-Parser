@@ -1,9 +1,0 @@
-in lib; //confirmar que nao esta vazia
-out fil; // esvaziar
-out aut;
-fil = $(" lib book "); //na variavel lib ir bu
-in fil;
-aut = $(" fil book autor name:not(luis)");
-in libPub;
-out filPub;
-filPub = $("libPub book ");

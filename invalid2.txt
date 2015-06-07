@@ -1,7 +1,0 @@
-in lib;
-out fil
-uitr = $("lib son");
-fil = $("lib value");
-fil = $(" lib autor:first > name:not ");
-fil = $(" lib[ id = 'ab56'  livro:first[ qualidade='boa']  ");
-
