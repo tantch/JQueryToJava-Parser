@@ -27,7 +27,7 @@ public class JavaLexer extends Lexer {
 		CharacterLiteral=54, StringLiteral=55, NullLiteral=56, LPAREN=57, RPAREN=58, 
 		LBRACE=59, RBRACE=60, LBRACK=61, RBRACK=62, SEMI=63, COMMA=64, DOT=65, 
 		ASSIGN=66, GT=67, LT=68, BANG=69, TILDE=70, QUESTION=71, DEV=72, COLON=73, 
-		ELIPSIS=74, EQUAL=75, LE=76, GE=77, NOTEQUAL=78, AND=79, OR=80, INC=81, 
+		EQUAL=74, LE=75, ELIPSIS=76, GE=77, NOTEQUAL=78, AND=79, OR=80, INC=81, 
 		DEC=82, ADD=83, SUB=84, MUL=85, DIV=86, BITAND=87, BITOR=88, CARET=89, 
 		MOD=90, ARROW=91, COLONCOLON=92, ADD_ASSIGN=93, SUB_ASSIGN=94, MUL_ASSIGN=95, 
 		DIV_ASSIGN=96, AND_ASSIGN=97, OR_ASSIGN=98, XOR_ASSIGN=99, MOD_ASSIGN=100, 
@@ -62,7 +62,7 @@ public class JavaLexer extends Lexer {
 		"StringCharacter", "EscapeSequence", "OctalEscape", "ZeroToThree", "UnicodeEscape", 
 		"NullLiteral", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
 		"SEMI", "COMMA", "DOT", "ASSIGN", "GT", "LT", "BANG", "TILDE", "QUESTION", 
-		"DEV", "COLON", "ELIPSIS", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", 
+		"DEV", "COLON", "EQUAL", "LE", "ELIPSIS", "GE", "NOTEQUAL", "AND", "OR", 
 		"INC", "DEC", "ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "CARET", 
 		"MOD", "ARROW", "COLONCOLON", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", 
 		"DIV_ASSIGN", "AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", "LSHIFT_ASSIGN", 
@@ -83,8 +83,8 @@ public class JavaLexer extends Lexer {
 		"'super'", "'switch'", "'synchronized'", "'this'", "'throw'", "'throws'", 
 		"'transient'", "'try'", "'void'", "'volatile'", "'while'", null, null, 
 		null, null, null, "'null'", null, null, "'{'", "'}'", null, null, null, 
-		"','", "'.'", null, "'>'", "'<'", "'!'", "'~'", "'?'", null, "':'", null, 
-		"'=='", "'<='", "'>='", "'!='", "'&&'", "'||'", "'++'", null, "'+'", "'-'", 
+		"','", "'.'", null, "'>'", "'<'", "'!'", "'~'", "'?'", null, "':'", "'=='", 
+		"'<='", null, "'>='", "'!='", "'&&'", "'||'", "'++'", null, "'+'", "'-'", 
 		"'*'", "'/'", "'&'", "'|'", "'^'", "'%'", "'->'", "'::'", "'+='", "'-='", 
 		"'*='", "'/='", "'&='", "'|='", "'^='", "'%='", "'<<='", "'>>='", "'>>>='", 
 		null, "'@'", null, null, null, null, "'@->JQ'", "'@<-JQ'", null, null, 
@@ -102,7 +102,7 @@ public class JavaLexer extends Lexer {
 		"BooleanLiteral", "CharacterLiteral", "StringLiteral", "NullLiteral", 
 		"LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", "SEMI", "COMMA", 
 		"DOT", "ASSIGN", "GT", "LT", "BANG", "TILDE", "QUESTION", "DEV", "COLON", 
-		"ELIPSIS", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", 
+		"EQUAL", "LE", "ELIPSIS", "GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", 
 		"ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "CARET", "MOD", "ARROW", 
 		"COLONCOLON", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", 
 		"AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", "LSHIFT_ASSIGN", 
@@ -258,7 +258,7 @@ public class JavaLexer extends Lexer {
 		"`\3`\5`\u03a3\n`\3a\3a\3a\3a\5a\u03a9\na\3b\3b\3b\3b\3b\3b\3b\3b\3b\3"+
 		"b\3b\5b\u03b6\nb\3c\3c\3d\3d\3d\3d\3d\3d\3d\3e\3e\3e\3e\3e\3f\3f\3g\3"+
 		"g\3h\3h\3i\3i\3j\3j\3k\3k\3l\3l\3m\3m\3n\3n\3o\3o\3p\3p\3q\3q\3r\3r\3"+
-		"s\3s\3t\3t\3u\3u\3u\3v\3v\3w\3w\3w\3w\3x\3x\3x\3y\3y\3y\3z\3z\3z\3{\3"+
+		"s\3s\3t\3t\3u\3u\3u\3v\3v\3w\3w\3w\3x\3x\3x\3y\3y\3y\3y\3z\3z\3z\3{\3"+
 		"{\3{\3|\3|\3|\3}\3}\3}\3~\3~\3~\3\177\3\177\3\177\3\u0080\3\u0080\3\u0081"+
 		"\3\u0081\3\u0082\3\u0082\3\u0083\3\u0083\3\u0084\3\u0084\3\u0085\3\u0085"+
 		"\3\u0086\3\u0086\3\u0087\3\u0087\3\u0088\3\u0088\3\u0088\3\u0089\3\u0089"+
@@ -364,7 +364,7 @@ public class JavaLexer extends Lexer {
 		"\u03d1\3\2\2\2\u00da\u03d3\3\2\2\2\u00dc\u03d5\3\2\2\2\u00de\u03d7\3\2"+
 		"\2\2\u00e0\u03d9\3\2\2\2\u00e2\u03db\3\2\2\2\u00e4\u03dd\3\2\2\2\u00e6"+
 		"\u03df\3\2\2\2\u00e8\u03e1\3\2\2\2\u00ea\u03e3\3\2\2\2\u00ec\u03e6\3\2"+
-		"\2\2\u00ee\u03e8\3\2\2\2\u00f0\u03ec\3\2\2\2\u00f2\u03ef\3\2\2\2\u00f4"+
+		"\2\2\u00ee\u03e8\3\2\2\2\u00f0\u03eb\3\2\2\2\u00f2\u03ee\3\2\2\2\u00f4"+
 		"\u03f2\3\2\2\2\u00f6\u03f5\3\2\2\2\u00f8\u03f8\3\2\2\2\u00fa\u03fb\3\2"+
 		"\2\2\u00fc\u03fe\3\2\2\2\u00fe\u0401\3\2\2\2\u0100\u0404\3\2\2\2\u0102"+
 		"\u0406\3\2\2\2\u0104\u0408\3\2\2\2\u0106\u040a\3\2\2\2\u0108\u040c\3\2"+
@@ -571,9 +571,9 @@ public class JavaLexer extends Lexer {
 		"\3\2\2\2\u03dd\u03de\7#\2\2\u03de\u00e5\3\2\2\2\u03df\u03e0\7\u0080\2"+
 		"\2\u03e0\u00e7\3\2\2\2\u03e1\u03e2\7A\2\2\u03e2\u00e9\3\2\2\2\u03e3\u03e4"+
 		"\7/\2\2\u03e4\u03e5\7/\2\2\u03e5\u00eb\3\2\2\2\u03e6\u03e7\7<\2\2\u03e7"+
-		"\u00ed\3\2\2\2\u03e8\u03e9\7\60\2\2\u03e9\u03ea\7\60\2\2\u03ea\u03eb\7"+
-		"\60\2\2\u03eb\u00ef\3\2\2\2\u03ec\u03ed\7?\2\2\u03ed\u03ee\7?\2\2\u03ee"+
-		"\u00f1\3\2\2\2\u03ef\u03f0\7>\2\2\u03f0\u03f1\7?\2\2\u03f1\u00f3\3\2\2"+
+		"\u00ed\3\2\2\2\u03e8\u03e9\7?\2\2\u03e9\u03ea\7?\2\2\u03ea\u00ef\3\2\2"+
+		"\2\u03eb\u03ec\7>\2\2\u03ec\u03ed\7?\2\2\u03ed\u00f1\3\2\2\2\u03ee\u03ef"+
+		"\7\60\2\2\u03ef\u03f0\7\60\2\2\u03f0\u03f1\7\60\2\2\u03f1\u00f3\3\2\2"+
 		"\2\u03f2\u03f3\7@\2\2\u03f3\u03f4\7?\2\2\u03f4\u00f5\3\2\2\2\u03f5\u03f6"+
 		"\7#\2\2\u03f6\u03f7\7?\2\2\u03f7\u00f7\3\2\2\2\u03f8\u03f9\7(\2\2\u03f9"+
 		"\u03fa\7(\2\2\u03fa\u00f9\3\2\2\2\u03fb\u03fc\7~\2\2\u03fc\u03fd\7~\2"+
