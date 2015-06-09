@@ -56,7 +56,6 @@ public class MyListener extends JavaParserBaseListener {
 	// JAVA PART
 	@Override
 	public void enterCompilationUnit(JavaParser.CompilationUnitContext ctx) {
-		System.out.println("entering");
 	}
 
 	@Override
@@ -161,12 +160,11 @@ public class MyListener extends JavaParserBaseListener {
 		classVars = new HashMap<String, Variable>();
 		curClass = ctx.normalClassDeclaration().Identifier().getText();
 		Starter.classes.put(curClass, new ClassDeclaration(curClass));
-		System.out.println("Class cleanup for class: " + curClass);
 	};
 
 	@Override
 	public void enterFieldDeclaration(JavaParser.FieldDeclarationContext ctx) {
-		try {
+		try {	
 
 			Starter.classes.get(curClass).addAtrib(
 					ctx.variableDeclaratorList().variableDeclarator(0)
@@ -203,7 +201,6 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void exitCompilationUnit(JavaParser.CompilationUnitContext ctx) {
-		System.out.println("exiting");
 	}
 
 	// JQUERY PART

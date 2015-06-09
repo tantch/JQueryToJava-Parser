@@ -52,6 +52,6 @@ public class ClassDeclaration {
 	public boolean getIsArray(String name) {
 		String cls= atribs.get(name).getClassName();
 		String[] str = cls.split("<|>");
-		return str.length >2;
+		return str.length >1;
 	}
 }

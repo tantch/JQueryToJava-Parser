@@ -12,9 +12,9 @@ public class Variable {
 		}
 
 		this.initialized = initialized;
-		System.out.println("created a variable with name : " + name
+		/*System.out.println("created a variable with name : " + name
 				+ " of class " + classType + " with initialized: "
-				+ initialized);
+				+ initialized);*/
 	}
 
 	public boolean isArrayList() {

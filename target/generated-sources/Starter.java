@@ -16,6 +16,7 @@ public class Starter {
 	static TreeViewer viewr;
 	static ArrayList<Block> representation;
 	static HashMap<String, ClassDeclaration> classes;
+	static int count=0;
 
 	private static boolean syntaxErrors = false;
 
@@ -62,7 +63,7 @@ public class Starter {
 		walker.walk(extractor, tree); // initiate walk of tree with listener
 		
 		for (Block block : representation) {
-			block.print();
+			//block.print();
 			block.processToJava();
 		}
 		
