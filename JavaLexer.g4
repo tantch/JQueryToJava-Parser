@@ -685,11 +685,6 @@ COLON
 	':'
 ;
 
-ELIPSIS
-:
-	'...'
-;
-
 EQUAL
 :
 	'=='
@@ -698,6 +693,11 @@ EQUAL
 LE
 :
 	'<='
+;
+
+ELIPSIS
+:
+	'...'
 ;
 
 GE

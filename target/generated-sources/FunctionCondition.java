@@ -11,7 +11,7 @@ public class FunctionCondition extends SelectorCondition {
 			this.arg = "nothing";
 			break;
 		case ":not":
-		case ":cointains":
+		case ":contains":
 		case ":eq":
 		case ":lt":
 		case ":gt":
@@ -25,10 +25,13 @@ public class FunctionCondition extends SelectorCondition {
 
 	@Override
 	public String getDesc() {
-		return "Function Condition";
+		return "Function";
 	}
 	public String  getName(){
 		return name;
+	}
+	public String getArg(){
+		return arg;
 	}
 
 }

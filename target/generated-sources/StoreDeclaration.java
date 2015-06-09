@@ -91,11 +91,114 @@ public class StoreDeclaration extends Declaration {
 			}
 
 			str += "}\n";
+
+			
+		
 			ArrayList<SelectorCondition> selC = sel.getConds();
 			if (isArray && selC.size()>0) {
 			str += "for(Iterator<" + storeType + "> it= temp"+Starter.count+".iterator();it.hasNext()){\n";
-			//array
-			str += "}\n";
+			str+= "\t"+storeType+" obj = it.next();\n";	
+			str+= "\tint i = 0;\n";
+			for(int j = 0; j < sel.getConds().size(); j++){
+					SelectorCondition sel1 = sel.getConds().get(j);
+					String desc = sel1.getDesc();
+					if(desc.equals("Brackets")){
+						BrackCondition brack = (BrackCondition) sel1;
+						switch(brack.getOp()){
+						case "=":
+							str += "if( obj." + brack.getAtrib() + " != " + brack.getVal() + " ){\n";
+							str += "\tit.remove();\n";
+							str += "\tcontinue;\n";
+							str += "}\n";
+							break;
+						case "*=":
+							str += "if( !obj." + brack.getAtrib() + ".contains(" + brack.getVal() + ")){\n";
+							str += "\tit.remove();\n";
+							str += "\tcontinue;\n";
+							str += "}\n";
+							break;
+						case "$=":
+							str += "if( !obj." + brack.getAtrib() + ".endsWith(" + brack.getVal() + ")){\n";
+							str += "\tit.remove();\n";
+							str += "\tcontinue;\n";
+							str += "}\n";
+							break;
+						case "!=":
+							str += "if( obj." + brack.getAtrib() + " == " + brack.getVal() + " ){\n";
+							str += "\tit.remove();\n";
+							str += "\tcontinue;\n";
+							str += "}\n";
+							break;
+						case "^=":
+							str += "if( !obj." + brack.getAtrib() + ".startsWith(" + brack.getVal() + ")){\n";
+							str += "\tit.remove();\n";
+							str += "\tcontinue;\n";
+							str += "}\n";
+							break;
+						}
+					}
+					else if(desc.equals("Function")){
+						FunctionCondition func = (FunctionCondition) sel1;
+						switch(func.getName()){
+							case ":even":
+								str += "if(i%2 != 0){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":first":
+								str += "if(i != 0){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":odd":
+								str += "if(i%2 == 0){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":last":
+								str += "if(it.hasNext()){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+								/*
+							case ":not":
+								str += "if(obj == "+ func.getArg() +"){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;*/
+							case ":contains":
+								str += "if( !obj" + ".contains(" + func.getArg() + ")){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":eq":
+								str += "if(i != "+ func.getArg() +"){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":lt":
+								str += "if("+func.getArg()+ " >= i){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+							case ":gt":
+								str += "if("+func.getArg()+" =< i){\n";
+								str += "\tit.remove();\n";
+								str += "\tcontinue;\n";
+								str += "}\n";
+								break;
+						}
+					}
+				}
+			str += "\ti++;\n}\n";
 			}
 			curntVar = "temp" + Starter.count;
 			curVarGenType = storeType;

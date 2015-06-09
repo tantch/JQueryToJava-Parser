@@ -42,7 +42,7 @@ public class BrackCondition extends SelectorCondition {
 	 */
 	@Override
 	public String getDesc() {
-		return "Brackets Condition";
+		return "Brackets";
 	}
 
 }

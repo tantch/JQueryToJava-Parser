@@ -6,7 +6,6 @@ public class Selector {
 	private String prevSeparator;
 	private ArrayList<SelectorCondition> conds;
 
-
 	/**
 	 * @return the prevSeparator
 	 */
@@ -21,8 +20,6 @@ public class Selector {
 	public void setPrevSeparator(String prevSeparator) {
 		this.prevSeparator = prevSeparator;
 	}
-
-
 	/**
 	 * @param name
 	 */

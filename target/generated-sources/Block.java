@@ -8,7 +8,6 @@ public class Block {
 	public Block(int st, int fn) {
 		this.startLine = st;
 		this.finishLine = fn;
-
 		declarations = new ArrayList<Declaration>();
 	}
 
