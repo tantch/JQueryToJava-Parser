@@ -63,7 +63,7 @@ public class Test {
 		in lib; 
 		out fil;
 		out aut;
-		fil = $(" lib > authors"); 
+		fil = $(" lib > authors [ name = ' joao ' ]"); 
 		in fil;
 		aut = $(" fil > name");
 		in libPub;

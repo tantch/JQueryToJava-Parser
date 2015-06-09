@@ -64,33 +64,35 @@ public class StoreDeclaration extends Declaration {
 			Selector sel = selectors.get(i);
 
 			String storeType = "Object";
-			boolean isArray=true;
+			boolean isArray = true;
 
 			try {
-				
+
 				storeType = Starter.classes.get(curVarGenType).getAtribClass(
 						sel.getName());
-				isArray = Starter.classes.get(curVarGenType).getIsArray(sel.getName());
-				
+				isArray = Starter.classes.get(curVarGenType).getIsArray(
+						sel.getName());
+
 			} catch (NullPointerException e) {
-				System.out.println("ERROR: class "+curVarGenType+" for selector " + sel.getName()
+				System.out.println("ERROR: class " + curVarGenType
+						+ " for selector " + sel.getName()
 						+ " was not declared, or the atribute does not exist");
 			}
 			str += "ArrayList<" + storeType + "> temp" + Starter.count
 					+ " = new ArrayList<" + storeType + ">();\n";
 			str += "for(" + curVarGenType + " " + currentTypeIns + " : "
 					+ curntVar + "){\n";
-			if(!isArray){
-			str += "\t temp" + Starter.count + ".add(" + currentTypeIns + "."
-					+ sel.getName() + ");\n";
-			}else{
-			str += "\t temp" + Starter.count + ".addAll(" + currentTypeIns + "."
-					+ sel.getName() + ");\n";
+			if (!isArray) {
+				str += "\t temp" + Starter.count + ".add(" + currentTypeIns
+						+ "." + sel.getName() + ");\n";
+			} else {
+				str += "\t temp" + Starter.count + ".addAll(" + currentTypeIns
+						+ "." + sel.getName() + ");\n";
 			}
-			
+
 			str += "}\n";
 
-			curntVar = "temp" +Starter.count;
+			curntVar = "temp" + Starter.count;
 			curVarGenType = storeType;
 			currentTypeIns = curVarGenType.toLowerCase();
 			Starter.count++;
@@ -99,8 +101,9 @@ public class StoreDeclaration extends Declaration {
 		// System.out.println("LOG: outClass = " + outClass + " of name " +
 		// outVar.getName());
 		// System.out.println("LOG: curVarGenType = " + curVarGenType);
-		if (outClass.equals(curVarGenType) || outClass.equals(MyUtils.getClassName(curVarGenType))) {
-			str += outVar.getName() + " = temp" + (Starter.count -1) + "; \n";
+		if (outClass.equals(curVarGenType)
+				|| outClass.equals(MyUtils.getClassName(curVarGenType))) {
+			str += outVar.getName() + " = temp" + (Starter.count - 1) + "; \n";
 		} else {
 			System.out
 					.println("ERROR: outputvar ins't the same type as expected final output from selections");
