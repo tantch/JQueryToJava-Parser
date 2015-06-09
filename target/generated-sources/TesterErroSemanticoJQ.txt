@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 public class Tester {
 
-	public static void main(String[] args) {
+	public static void main(String[] args,ArrayList<Author> autores1) {
 		ArrayList<Book> lib=new ArrayList<Book>();
-		ArrayList<Author> autores1 = new ArrayList<Author>();
+		
 		ArrayList<String> names1;
 		ArrayList<String> names2;
 		ArrayList<Integer> isbns;
