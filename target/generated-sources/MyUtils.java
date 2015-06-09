@@ -11,7 +11,7 @@ public class MyUtils {
 			return "Boolean";
 
 		default:
-			return "Object";
+			return nm;
 		}
 	}
 }

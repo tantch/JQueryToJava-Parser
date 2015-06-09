@@ -57,7 +57,7 @@ public class LoadVariableDeclaration extends Declaration{
 		str+="}\n";
 		javaCode=str;
 		
-		System.out.println(str);
+		//System.out.println(str);
 	}
 	
 	

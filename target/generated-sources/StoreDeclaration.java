@@ -78,8 +78,8 @@ public class StoreDeclaration extends Declaration {
 						+ " for selector " + sel.getName()
 						+ " was not declared, or the atribute does not exist");
 			}
-			str += "ArrayList<" + storeType + "> temp" + Starter.count
-					+ " = new ArrayList<" + storeType + ">();\n";
+			str += "ArrayList<" + MyUtils.getClassName(storeType) + "> temp" + Starter.count
+					+ " = new ArrayList<" + MyUtils.getClassName(storeType) + ">();\n";
 			str += "for(" + curVarGenType + " " + currentTypeIns + " : "
 					+ curntVar + "){\n";
 			if (!isArray) {
@@ -96,7 +96,7 @@ public class StoreDeclaration extends Declaration {
 		
 			ArrayList<SelectorCondition> selC = sel.getConds();
 			if (isArray && selC.size()>0) {
-			str += "for(Iterator<" + storeType + "> it= temp"+Starter.count+".iterator();it.hasNext()){\n";
+			str += "for(Iterator<" + storeType + "> it= temp"+Starter.count+".iterator();it.hasNext();){\n";
 			str+= "\t"+storeType+" obj = it.next();\n";	
 			str+= "\tint i = 0;\n";
 			for(int j = 0; j < sel.getConds().size(); j++){
@@ -106,31 +106,31 @@ public class StoreDeclaration extends Declaration {
 						BrackCondition brack = (BrackCondition) sel1;
 						switch(brack.getOp()){
 						case "=":
-							str += "if( obj." + brack.getAtrib() + " != " + brack.getVal() + " ){\n";
+							str += "if( obj." + brack.getAtrib() + " != \"" + brack.getVal() + "\" ){\n";
 							str += "\tit.remove();\n";
 							str += "\tcontinue;\n";
 							str += "}\n";
 							break;
 						case "*=":
-							str += "if( !obj." + brack.getAtrib() + ".contains(" + brack.getVal() + ")){\n";
+							str += "if( !obj." + brack.getAtrib() + ".contains(\"" + brack.getVal() + "\")){\n";
 							str += "\tit.remove();\n";
 							str += "\tcontinue;\n";
 							str += "}\n";
 							break;
 						case "$=":
-							str += "if( !obj." + brack.getAtrib() + ".endsWith(" + brack.getVal() + ")){\n";
+							str += "if( !obj." + brack.getAtrib() + ".endsWith(\"" + brack.getVal() + "\")){\n";
 							str += "\tit.remove();\n";
 							str += "\tcontinue;\n";
 							str += "}\n";
 							break;
 						case "!=":
-							str += "if( obj." + brack.getAtrib() + " == " + brack.getVal() + " ){\n";
+							str += "if( obj." + brack.getAtrib() + " == \"" + brack.getVal() + "\" ){\n";
 							str += "\tit.remove();\n";
 							str += "\tcontinue;\n";
 							str += "}\n";
 							break;
 						case "^=":
-							str += "if( !obj." + brack.getAtrib() + ".startsWith(" + brack.getVal() + ")){\n";
+							str += "if( !obj." + brack.getAtrib() + ".startsWith(\"" + brack.getVal() + "\")){\n";
 							str += "\tit.remove();\n";
 							str += "\tcontinue;\n";
 							str += "}\n";
@@ -216,6 +216,7 @@ public class StoreDeclaration extends Declaration {
 			System.out
 					.println("ERROR: outputvar ins't the same type as expected final output from selections");
 		}
-		System.out.println(str);
+		javaCode=str;
+		//System.out.println(str);
 	}
 }

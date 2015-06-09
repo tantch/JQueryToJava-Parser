@@ -53,7 +53,7 @@ public class StoreVariableDeclaration extends Declaration {
 		str += "\n";
 		javaCode = str;
 
-		System.out.println(str);
+		//System.out.println(str);
 	}
 
 }

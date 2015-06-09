@@ -9,32 +9,16 @@ import org.antlr.v4.runtime.atn.LexerATNSimulator;
 import org.antlr.v4.runtime.atn.PredictionMode;
 
 import java.io.File;
+import java.util.Iterator;
 import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-public class Book{
 
-	private ArrayList<Author> authors;
-	private int isbn;
-	private int year;
-	
-	public ArrayList<String> getAuthor(){
-		return authors;
-	}
-	public int getIsbn(){
-		return isbn;
-	}
-	public int getYear(){
-		return year;
-	}
-	
 
-}
-
-public class Test {
+public class teste{
 //	public static long lexerTime = 0;
 	public static boolean profile = false;
 	public static boolean notree = false;
@@ -43,7 +27,6 @@ public class Test {
 	public static boolean SLL = false;
 	public static ArrayList<Integer> filPub;
 	
-	public static Worker[] workers = new Worker[3];
 	static int windex = 0;
 
 	public static CyclicBarrier barrier;
@@ -52,9 +35,9 @@ public class Test {
 	
 	
 
-	public static void main(String[] args,String nome,ArrayList<Book> libPub) {
+	public void testeJquery(ArrayList<Book> args,String nome,ArrayList<Book> libPub) {
 	
-		ArrayList<Book> lib = agrs[0];
+		ArrayList<Book> lib = args;
 		ArrayList<Author> fil = new ArrayList<Author>();	
 		ArrayList<String> aut;
 		ArrayList<String> awrds = new ArrayList<String>();
@@ -72,9 +55,30 @@ public class Test {
 		out awrds;
 		awrds = $("lib > authors > awards ");
 		@<-JQ
+		
+		System.out.println(fil.get(0));
 	}
-}
-public class Author{
-	private ArrayList<String> awards;
-	private String name;
+	private class Book{
+	
+		private ArrayList<Author> authors;
+		private int isbn;
+		private int year;
+		
+		public ArrayList<Author> getAuthor(){
+			return authors;
+		}
+		public int getIsbn(){
+			return isbn;
+		}
+		public int getYear(){
+			return year;
+		}
+		
+
+	}	
+
+	private class Author{
+		private ArrayList<String> awards;
+		private String name;
+	}
 }

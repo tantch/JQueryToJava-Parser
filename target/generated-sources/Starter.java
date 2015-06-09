@@ -71,7 +71,7 @@ public class Starter {
 			block.processToJava();
 		}
 		
-		WriteToFile(inputFile, "teste.java", representation);
+		WriteToFile(inputFile, "Tester.java", representation);
 	}
 
 	public static void SyntaxError() {
