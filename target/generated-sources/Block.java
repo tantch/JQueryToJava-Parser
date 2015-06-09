@@ -45,4 +45,11 @@ public class Block {
 		}
 	}
 
+	public void processToJava() {
+		for (Declaration declaration : declarations) {
+			declaration.processToJava();
+		}
+		
+	}
+
 }

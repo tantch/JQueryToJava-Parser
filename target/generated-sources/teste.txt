@@ -15,15 +15,35 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
+public class Book{
 
-class Test {
+	private ArrayList<Author> authors;
+	private int isbn;
+	private int year;
+	
+	public ArrayList<String> getAuthor(){
+		return authors;
+	}
+	public int getIsbn(){
+		return isbn;
+	}
+	public int getYear(){
+		return year;
+	}
+	
+
+}
+public class Author{
+	private ArrayList<String> names;
+}
+public class Test {
 //	public static long lexerTime = 0;
 	public static boolean profile = false;
 	public static boolean notree = false;
 	public static boolean gui = false;
 	public static boolean printTree = false;
 	public static boolean SLL = false;
-	public static ArrayList<Books> books;
+	public static ArrayList<Book> books;
 	
 	public static Worker[] workers = new Worker[3];
 	static int windex = 0;
@@ -34,21 +54,22 @@ class Test {
 	
 	
 
-	public static void main(String[] args,String nome,ArrayList<Books> libPub) {
+	public static void main(String[] args,String nome,ArrayList<Book> libPub) {
 	
-		ArrayList<Books> lib = agrs[0];
-		ArrayList<Books> fil = new ArrayList<Books>();
+		ArrayList<Book> lib = agrs[0];
+		ArrayList<Book> fil = new ArrayList<Book>();	
+		ArrayList<Book> aut;
 		String autor;
 		@->JQ
 		in lib; 
 		out fil;
 		out aut;
-		fil = $(" lib book "); 
+		fil = $(" lib "); 
 		in fil;
-		aut = $(" fil book autor name:not(luis)");
+		aut = $(" fil > authors > names");
 		in libPub;
 		out filPub;
-		filPub = $("libPub book ");
+		filPub = $("libPub > isbn");
 		@<-JQ
 	}
 }

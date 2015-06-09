@@ -1,4 +1,3 @@
-
 public class Variable {
 	private String name;
 	private String classType;
@@ -8,7 +7,7 @@ public class Variable {
 	public Variable(String name, String mainClass, boolean initialized) {
 		this.name = name;
 		classType = mainClass.split("<|>")[0];
-		if (mainClass.split("<|>").length > 2) {
+		if (mainClass.split("<|>").length > 1) {
 			genericType = mainClass.split("<|>")[1];
 		}
 
@@ -18,11 +17,25 @@ public class Variable {
 				+ initialized);
 	}
 
-	public boolean isArrayList(){
+	public boolean isArrayList() {
 		return classType.equals("ArrayList");
 	}
-	public boolean isString(){
+
+	public boolean isString() {
 		return classType.equals("String");
 	}
 
+	public boolean isInitialized() {
+		return initialized;
+	}
+	public String getGenericType(){
+		if(genericType ==null){
+			return classType;
+		}else{
+			return genericType;
+		}
+	}
+	public String getName(){
+		return name;
+	}
 }

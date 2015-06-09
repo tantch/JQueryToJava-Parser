@@ -5,6 +5,7 @@ public class Selector {
 	private String name;
 	private String prevSeparator;
 
+
 	/**
 	 * @return the prevSeparator
 	 */

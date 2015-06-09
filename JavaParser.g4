@@ -1666,12 +1666,16 @@ line
 
 exp
 :
-	ter = STRING EQS OPENXP exp1* CLOSEXP ENDL
+	ter = STRING EQS OPENXP fexp1 exp1* CLOSEXP ENDL
 ;
 
+fexp1
+:
+	ter = STRING
+;
 exp1
 :
-	SEP? ter = STRING
+	SEP ter = STRING
 	(
 		psel
 		| braexp

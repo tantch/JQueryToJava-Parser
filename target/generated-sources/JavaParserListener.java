@@ -2438,6 +2438,16 @@ public interface JavaParserListener extends ParseTreeListener {
 	 */
 	void exitExp(JavaParser.ExpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#fexp1}.
+	 * @param ctx the parse tree
+	 */
+	void enterFexp1(JavaParser.Fexp1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#fexp1}.
+	 * @param ctx the parse tree
+	 */
+	void exitFexp1(JavaParser.Fexp1Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#exp1}.
 	 * @param ctx the parse tree
 	 */

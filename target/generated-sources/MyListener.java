@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
 public class MyListener extends JavaParserBaseListener {
 	private HashMap<String, InOutVar> vars;
 	private HashMap<String, Variable> currentLocalVars;
 	private HashMap<String, Variable> classVars;
 	private HashMap<String, Variable> argumentVars;
+	private String curClass;
 	private int errors;
 	private int warnings;
 
@@ -16,6 +15,7 @@ public class MyListener extends JavaParserBaseListener {
 		currentLocalVars = new HashMap<String, Variable>();
 		classVars = new HashMap<String, Variable>();
 		argumentVars = new HashMap<String, Variable>();
+		Starter.classes = new HashMap<String, ClassDeclaration>();
 		errors = 0;
 		warnings = 0;
 	}
@@ -45,7 +45,7 @@ public class MyListener extends JavaParserBaseListener {
 		if (argumentVars.containsKey(nm)) {
 			return argumentVars.get(nm);
 		}
-		return null;
+		return new Variable(nm, "teste", false);
 	}
 
 	// JAVA PART
@@ -154,6 +154,25 @@ public class MyListener extends JavaParserBaseListener {
 	@Override
 	public void enterClassDeclaration(JavaParser.ClassDeclarationContext ctx) {
 		classVars = new HashMap<String, Variable>();
+		curClass = ctx.normalClassDeclaration().Identifier().getText();
+		Starter.classes.put(curClass, new ClassDeclaration(curClass));
+	};
+
+	@Override
+	public void enterFieldDeclaration(JavaParser.FieldDeclarationContext ctx) {
+		try {
+
+			Starter.classes.get(curClass).addAtrib(
+					ctx.variableDeclaratorList().variableDeclarator(0)
+							.variableDeclaratorId().getText(),
+					ctx.unannType().getText(), ctx.fieldModifier(0).getText());
+
+		} catch (NullPointerException e) {
+			System.out
+					.println("Semantic step of field declaration skipped because of sintax error");
+			return;
+		}
+
 	};
 
 	@Override
@@ -161,6 +180,20 @@ public class MyListener extends JavaParserBaseListener {
 		classVars = new HashMap<String, Variable>();
 		argumentVars = new HashMap<String, Variable>();
 		vars = new HashMap<String, InOutVar>();
+
+		try {
+
+			Starter.classes.get(curClass).addMethod(
+					ctx.methodHeader().methodDeclarator().Identifier()
+							.getText(), ctx.methodHeader().result().getText(),
+					ctx.methodModifier(0).getText());
+
+		} catch (NullPointerException e) {
+			System.out
+					.println("Semantic step of method declaration skipped because of sintax error");
+			return;
+		}
+
 	};
 
 	@Override
@@ -209,6 +242,7 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else if (classVars.containsKey(nm)) {
@@ -218,6 +252,7 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else if (argumentVars.containsKey(nm)) {
@@ -227,6 +262,7 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as input was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else {
@@ -297,6 +333,7 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else if (classVars.containsKey(nm)) {
@@ -306,6 +343,7 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else if (argumentVars.containsKey(nm)) {
@@ -315,12 +353,14 @@ public class MyListener extends JavaParserBaseListener {
 					System.out
 							.println("Error.Variable being casted as output was not declared as an ArrayList on line: "
 									+ ctx.STRING().getSymbol().getLine());
+					errors++;
 				}
 
 			} else {
-				System.out.println("Error. Variable was not declared on line: "
-						+ ctx.STRING().getSymbol().getLine());
-				errors++;
+				System.out
+						.println("Warning. Variable was not declared on line: "
+								+ ctx.STRING().getSymbol().getLine());
+				warnings++;
 			}
 			StoreVariableDeclaration outDec;
 
@@ -380,28 +420,30 @@ public class MyListener extends JavaParserBaseListener {
 			Variable inVar = null;
 			Variable outVar = null;
 			StoreDeclaration dec = null;
-			if (!vars.containsKey(ctx.exp1(0).ter.getText())) {
+			if (!vars.containsKey(ctx.fexp1().ter.getText())) {
 				System.out.println("Input variable "
-						+ ctx.exp1(0).ter.getText()
+						+ ctx.fexp1().ter.getText()
 						+ " was not declared.Error in Line "
-						+ ctx.exp1(0).ter.getLine());
+						+ ctx.fexp1().ter.getLine());
 				errors++;
-			} else if (!vars.get(ctx.exp1(0).ter.getText()).isInput()) {
+			} else if (!vars.get(ctx.fexp1().ter.getText()).isInput()) {
 				System.out.println("Input variable "
-						+ ctx.exp1(0).ter.getText()
+						+ ctx.fexp1().ter.getText()
 						+ " was declared as an output var.Error in Line "
-						+ ctx.exp1(0).ter.getLine());
+						+ ctx.fexp1().ter.getLine());
 				errors++;
 			} else {
-				inVar = getVar(ctx.exp1(0).ter.getText());
-				vars.get(ctx.exp1(0).ter.getText()).setAsUsed();
+				inVar = getVar(ctx.fexp1().ter.getText());
+				vars.get(ctx.fexp1().ter.getText()).setAsUsed();
 			}
 			if (!vars.containsKey(ctx.ter.getText())) {
+
 				System.out.println("Output variable " + ctx.ter.getText()
 						+ " was not declared.Error in Line "
 						+ ctx.ter.getLine());
 				errors++;
 			} else if (!vars.get(ctx.ter.getText()).isOutput()) {
+
 				System.out.println("Output variable " + ctx.ter.getText()
 						+ " was declared as an input var.Error in Line "
 						+ ctx.ter.getLine());
@@ -430,7 +472,7 @@ public class MyListener extends JavaParserBaseListener {
 	@Override
 	public void exitExp(JavaParser.ExpContext ctx) {
 	}
-	
+
 	@Override
 	public void enterExp1(JavaParser.Exp1Context ctx) {
 		try {
@@ -447,15 +489,14 @@ public class MyListener extends JavaParserBaseListener {
 
 	}
 
-
 	@Override
 	public void enterPsel(JavaParser.PselContext ctx) {
 		try {
-			FunctionCondition cnd=null;
-			if(ctx.PSS()!= null){
-			}
-			else{
-				cnd= new FunctionCondition(ctx.PPS().getText(), ctx.STRING().getText());				
+			FunctionCondition cnd = null;
+			if (ctx.PSS() != null) {
+			} else {
+				cnd = new FunctionCondition(ctx.PPS().getText(), ctx.STRING()
+						.getText());
 			}
 			currentSelector().addCondition(cnd);
 		} catch (NullPointerException e) {
@@ -463,15 +504,15 @@ public class MyListener extends JavaParserBaseListener {
 			return;
 		}
 	};
-	
 
 	@Override
 	public void enterBraexp(JavaParser.BraexpContext ctx) {
 		try {
-			BrackCondition cnd=null;
-			
-			cnd= new BrackCondition(ctx.STRING(0).getText(),ctx.STRING(1).getText(), ctx.ops().getText());
-			
+			BrackCondition cnd = null;
+
+			cnd = new BrackCondition(ctx.STRING(0).getText(), ctx.STRING(1)
+					.getText(), ctx.ops().getText());
+
 			currentSelector().addCondition(cnd);
 		} catch (NullPointerException e) {
 			System.out.println("semantic step aborted because of sintax error");

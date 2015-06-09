@@ -2932,6 +2932,18 @@ public class JavaParserBaseListener implements JavaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFexp1(JavaParser.Fexp1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFexp1(JavaParser.Fexp1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExp1(JavaParser.Exp1Context ctx) { }
 	/**
 	 * {@inheritDoc}
