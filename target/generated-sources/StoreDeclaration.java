@@ -91,7 +91,12 @@ public class StoreDeclaration extends Declaration {
 			}
 
 			str += "}\n";
-
+			ArrayList<SelectorCondition> selC = sel.getConds();
+			if (isArray && selC.size()>0) {
+			str += "for(Iterator<" + storeType + "> it= temp"+Starter.count+".iterator();it.hasNext()){\n";
+			//array
+			str += "}\n";
+			}
 			curntVar = "temp" + Starter.count;
 			curVarGenType = storeType;
 			currentTypeIns = curVarGenType.toLowerCase();
