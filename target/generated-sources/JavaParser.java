@@ -27,7 +27,7 @@ public class JavaParser extends Parser {
 		CharacterLiteral=54, StringLiteral=55, NullLiteral=56, LPAREN=57, RPAREN=58, 
 		LBRACE=59, RBRACE=60, LBRACK=61, RBRACK=62, SEMI=63, COMMA=64, DOT=65, 
 		ASSIGN=66, GT=67, LT=68, BANG=69, TILDE=70, QUESTION=71, DEV=72, COLON=73, 
-		ELIPSIS=74, EQUAL=75, LE=76, GE=77, NOTEQUAL=78, AND=79, OR=80, INC=81, 
+		EQUAL=74, LE=75, ELIPSIS=76, GE=77, NOTEQUAL=78, AND=79, OR=80, INC=81, 
 		DEC=82, ADD=83, SUB=84, MUL=85, DIV=86, BITAND=87, BITOR=88, CARET=89, 
 		MOD=90, ARROW=91, COLONCOLON=92, ADD_ASSIGN=93, SUB_ASSIGN=94, MUL_ASSIGN=95, 
 		DIV_ASSIGN=96, AND_ASSIGN=97, OR_ASSIGN=98, XOR_ASSIGN=99, MOD_ASSIGN=100, 
@@ -207,8 +207,8 @@ public class JavaParser extends Parser {
 		"'super'", "'switch'", "'synchronized'", "'this'", "'throw'", "'throws'", 
 		"'transient'", "'try'", "'void'", "'volatile'", "'while'", null, null, 
 		null, null, null, "'null'", null, null, "'{'", "'}'", null, null, null, 
-		"','", "'.'", null, "'>'", "'<'", "'!'", "'~'", "'?'", null, "':'", null, 
-		"'=='", "'<='", "'>='", "'!='", "'&&'", "'||'", "'++'", null, "'+'", "'-'", 
+		"','", "'.'", null, "'>'", "'<'", "'!'", "'~'", "'?'", null, "':'", "'=='", 
+		"'<='", null, "'>='", "'!='", "'&&'", "'||'", "'++'", null, "'+'", "'-'", 
 		"'*'", "'/'", "'&'", "'|'", "'^'", "'%'", "'->'", "'::'", "'+='", "'-='", 
 		"'*='", "'/='", "'&='", "'|='", "'^='", "'%='", "'<<='", "'>>='", "'>>>='", 
 		null, "'@'", null, null, null, null, "'@->JQ'", "'@<-JQ'", null, null, 
@@ -226,7 +226,7 @@ public class JavaParser extends Parser {
 		"BooleanLiteral", "CharacterLiteral", "StringLiteral", "NullLiteral", 
 		"LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", "SEMI", "COMMA", 
 		"DOT", "ASSIGN", "GT", "LT", "BANG", "TILDE", "QUESTION", "DEV", "COLON", 
-		"ELIPSIS", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", 
+		"EQUAL", "LE", "ELIPSIS", "GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", 
 		"ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "CARET", "MOD", "ARROW", 
 		"COLONCOLON", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", 
 		"AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", "LSHIFT_ASSIGN", 
@@ -18930,7 +18930,7 @@ public class JavaParser extends Parser {
 		"\u0452\3\2\2\2\u0450\u044e\3\2\2\2\u0450\u0451\3\2\2\2\u0451\u0453\3\2"+
 		"\2\2\u0452\u0450\3\2\2\2\u0453\u0457\5v<\2\u0454\u0456\5\u00e8u\2\u0455"+
 		"\u0454\3\2\2\2\u0456\u0459\3\2\2\2\u0457\u0455\3\2\2\2\u0457\u0458\3\2"+
-		"\2\2\u0458\u045a\3\2\2\2\u0459\u0457\3\2\2\2\u045a\u045b\7L\2\2\u045b"+
+		"\2\2\u0458\u045a\3\2\2\2\u0459\u0457\3\2\2\2\u045a\u045b\7N\2\2\u045b"+
 		"\u045c\5r:\2\u045c\u045f\3\2\2\2\u045d\u045f\5\u009cO\2\u045e\u0450\3"+
 		"\2\2\2\u045e\u045d\3\2\2\2\u045f\u00a1\3\2\2\2\u0460\u0462\5\u00e8u\2"+
 		"\u0461\u0460\3\2\2\2\u0462\u0465\3\2\2\2\u0463\u0461\3\2\2\2\u0463\u0464"+
@@ -19501,14 +19501,14 @@ public class JavaParser extends Parser {
 		"Y\2\2\u0a98\u0a9a\5\u01be\u00e0\2\u0a99\u0a96\3\2\2\2\u0a9a\u0a9d\3\2"+
 		"\2\2\u0a9b\u0a99\3\2\2\2\u0a9b\u0a9c\3\2\2\2\u0a9c\u01bd\3\2\2\2\u0a9d"+
 		"\u0a9b\3\2\2\2\u0a9e\u0a9f\b\u00e0\1\2\u0a9f\u0aa0\5\u01c0\u00e1\2\u0aa0"+
-		"\u0aa9\3\2\2\2\u0aa1\u0aa2\f\4\2\2\u0aa2\u0aa3\7M\2\2\u0aa3\u0aa8\5\u01c0"+
+		"\u0aa9\3\2\2\2\u0aa1\u0aa2\f\4\2\2\u0aa2\u0aa3\7L\2\2\u0aa3\u0aa8\5\u01c0"+
 		"\u00e1\2\u0aa4\u0aa5\f\3\2\2\u0aa5\u0aa6\7P\2\2\u0aa6\u0aa8\5\u01c0\u00e1"+
 		"\2\u0aa7\u0aa1\3\2\2\2\u0aa7\u0aa4\3\2\2\2\u0aa8\u0aab\3\2\2\2\u0aa9\u0aa7"+
 		"\3\2\2\2\u0aa9\u0aaa\3\2\2\2\u0aaa\u01bf\3\2\2\2\u0aab\u0aa9\3\2\2\2\u0aac"+
 		"\u0aad\b\u00e1\1\2\u0aad\u0aae\5\u01c2\u00e2\2\u0aae\u0ac0\3\2\2\2\u0aaf"+
 		"\u0ab0\f\7\2\2\u0ab0\u0ab1\7F\2\2\u0ab1\u0abf\5\u01c2\u00e2\2\u0ab2\u0ab3"+
 		"\f\6\2\2\u0ab3\u0ab4\7E\2\2\u0ab4\u0abf\5\u01c2\u00e2\2\u0ab5\u0ab6\f"+
-		"\5\2\2\u0ab6\u0ab7\7N\2\2\u0ab7\u0abf\5\u01c2\u00e2\2\u0ab8\u0ab9\f\4"+
+		"\5\2\2\u0ab6\u0ab7\7M\2\2\u0ab7\u0abf\5\u01c2\u00e2\2\u0ab8\u0ab9\f\4"+
 		"\2\2\u0ab9\u0aba\7O\2\2\u0aba\u0abf\5\u01c2\u00e2\2\u0abb\u0abc\f\3\2"+
 		"\2\u0abc\u0abd\7\34\2\2\u0abd\u0abf\5\16\b\2\u0abe\u0aaf\3\2\2\2\u0abe"+
 		"\u0ab2\3\2\2\2\u0abe\u0ab5\3\2\2\2\u0abe\u0ab8\3\2\2\2\u0abe\u0abb\3\2"+

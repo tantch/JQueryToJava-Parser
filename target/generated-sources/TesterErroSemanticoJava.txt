@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+public class Tester {
+
+	public static void main(String[] args) {
+		ArrayList<Book> lib;
+		ArrayList<String> autores1;
+
+		ArrayList<Integer> isbns;
+		ArrayList<Integer> years;
+
+		
+		@->JQ
+		in lib; 
+		out isbns;
+		isbns = $("lib > isbn");
+		out years;
+		years= $("lib > year[ name = 'year' ]");
+		
+		@<-JQ
+		
+		System.out.println(isbns.toString());
+		System.out.println(years.toString());
+		
+		
+		@->JQ
+		out autores1;
+		out names1;
+		autores1 = $("lib > authors");
+		in autores1;
+		names1= $("autores1 > name");
+		out names2;
+		names2=$("lib > authors[ name='Nia'] > name");
+		@<-JQ
+		System.out.println(names1.toString());
+		System.out.println(names2.toString());
+	}
+
+	private static class Book {
+
+		private ArrayList<Author> authors;
+		private int isbn;
+		private int year;
+		public Book(int isbn,int year){
+			this.isbn=isbn;
+			this.year=year;
+			authors= new ArrayList<Author>();
+		}
+		public ArrayList<Author> getAuthors() {
+			return authors;
+		}
+
+		public void addAuthor(Author author){
+			authors.add(author);
+		}
+	
+
+	}
+
+	private static class Author {
+		public ArrayList<String> awards;
+		private String name;
+		
+		public Author(String name){
+			this.name=name;
+		}
+	}
+}

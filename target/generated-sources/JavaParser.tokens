@@ -71,9 +71,9 @@ TILDE=70
 QUESTION=71
 DEV=72
 COLON=73
-ELIPSIS=74
-EQUAL=75
-LE=76
+EQUAL=74
+LE=75
+ELIPSIS=76
 GE=77
 NOTEQUAL=78
 AND=79
@@ -188,8 +188,8 @@ WSJQ=129
 '~'=70
 '?'=71
 ':'=73
-'=='=75
-'<='=76
+'=='=74
+'<='=75
 '>='=77
 '!='=78
 '&&'=79

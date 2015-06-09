@@ -65,10 +65,13 @@ public class Starter {
 		MyListener extractor = new MyListener();
 
 		walker.walk(extractor, tree); // initiate walk of tree with listener
-		
+		try{
 		for (Block block : representation) {
 			//block.print();
 			block.processToJava();
+		}
+		}catch(NullPointerException e){
+			System.out.println("Error in processing java code because of previous error");
 		}
 		
 		WriteToFile(inputFile, "Tester.java", representation);

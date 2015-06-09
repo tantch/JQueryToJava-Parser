@@ -1,0 +1,77 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+public class Tester {
+
+	public static void main(String[] args) {
+		ArrayList<Book> lib=new ArrayList<Book>();
+		ArrayList<Author> autores1 = new ArrayList<Author>();
+		ArrayList<String> names1;
+		ArrayList<String> names2;
+		ArrayList<Integer> isbns;
+		ArrayList<Integer> years;
+		Book temp = new Book(1994,12345);
+		temp.addAuthor(new Author("Luis"));
+		lib.add(temp);
+		Book tempb = new Book(2323,123331);
+		tempb.addAuthor(new Author("Nia"));
+		lib.add(tempb);
+		
+		@->JQ
+		in lib 
+		isbns out;
+		isbns = $("lib > isbn");
+
+		years= $("lib year[ name = 'year' ]");
+		
+		@<-JQ
+		
+		System.out.println(isbns.toString());
+		System.out.println(years.toString());
+		
+		
+		@->JQ
+		autores1 = ("lib > authors");
+		out autores1
+		names1;
+		in autores1;
+		names1= $(autores1 > name);
+		out names2;
+		names2=lib > $("authors[ name='Nia'] > name");
+		@<-JQ
+		System.out.println(names1.toString());
+		System.out.println(names2.toString());
+	}
+
+	private static class Book {
+
+		private ArrayList<Author> authors;
+		private int isbn;
+		public int year;
+		public Book(int isbn,int year){
+			this.isbn=isbn;
+			this.year=year;
+			authors= new ArrayList<Author>();
+		}
+		public ArrayList<Author> getAuthors() {
+			return authors;
+		}
+
+		public int getIsbn() {
+			return isbn;
+		}
+		public void addAuthor(Author author){
+			authors.add(author);
+		}
+	
+
+	}
+
+	private static class Author {
+		public ArrayList<String> awards;
+		public String name;
+		
+		public Author(String name){
+			this.name=name;
+		}
+	}
+}
