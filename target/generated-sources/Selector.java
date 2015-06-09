@@ -31,7 +31,20 @@ public class Selector {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public String getName(String className) {
+		if(Starter.classes.get(className).getAtribPrivacy(name).equals("public")){
+		return name;
+		}
+		else{
+			String temp=  "get"+name.substring(0, 1).toUpperCase() + name.substring(1);
+			if(Starter.classes.get(className).getMethodReturnClass(temp) ==null){
+				System.out.println("ERROR: Class "+className+" has private atributes with no default getter for use");
+			}
+			return temp+"()";
+			
+		}
+	}
+	public String getName(){
 		return name;
 	}
 

@@ -84,10 +84,10 @@ public class StoreDeclaration extends Declaration {
 					+ curntVar + "){\n";
 			if (!isArray) {
 				str += "\t temp" + Starter.count + ".add(" + currentTypeIns
-						+ "." + sel.getName() + ");\n";
+						+ "." + sel.getName(curVarGenType) + ");\n";
 			} else {
 				str += "\t temp" + Starter.count + ".addAll(" + currentTypeIns
-						+ "." + sel.getName() + ");\n";
+						+ "." + sel.getName(curVarGenType) + ");\n";
 			}
 
 			str += "}\n";
@@ -199,6 +199,9 @@ public class StoreDeclaration extends Declaration {
 					}
 				}
 			str += "\ti++;\n}\n";
+			}
+			if(!isArray && selC.size()!=0){
+				System.out.println("Warning : Bracket and functions selectors conditions have no effect on non Array class atributes selectors");
 			}
 			curntVar = "temp" + Starter.count;
 			curVarGenType = storeType;

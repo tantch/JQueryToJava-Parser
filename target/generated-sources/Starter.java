@@ -87,7 +87,7 @@ public class Starter {
 			pw = new PrintWriter(new File(destfile));
 			sc.useDelimiter("@->JQ");
 			String firstPart = sc.next();
-			System.out.print(firstPart);
+			//System.out.print(firstPart);
 			pw.print(firstPart);
 			int i =0;
 			while(sc.hasNext()){
@@ -105,7 +105,7 @@ public class Starter {
 			sc1.useDelimiter("@<-JQ");
 			sc1.next();
 			String next1 = sc1.next();
-			System.out.println(next1);
+			//System.out.println(next1);
 			pw.print(next1);
 			i++;
 			

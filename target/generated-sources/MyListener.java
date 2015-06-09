@@ -135,10 +135,7 @@ public class MyListener extends JavaParserBaseListener {
 				}
 			}
 
-			String mainClass = ctx.lastFormalParameter().formalParameter()
-					.unannType().unannReferenceType()
-					.unannClassOrInterfaceType()
-					.unannClassType_lfno_unannClassOrInterfaceType().getText();
+			String mainClass = ctx.lastFormalParameter().getText();
 
 			String varName = ctx.lastFormalParameter().formalParameter()
 					.variableDeclaratorId().getText();
@@ -150,7 +147,7 @@ public class MyListener extends JavaParserBaseListener {
 						initialized));
 			}
 		} catch (NullPointerException e) {
-			System.out.println("error");
+			//not an error, just no arguments for function
 			return;
 		}
 	};
@@ -213,7 +210,7 @@ public class MyListener extends JavaParserBaseListener {
 	@Override
 	public void exitStart(JavaParser.StartContext ctx) {
 		vars.forEach((k, v) -> printIfNotUsed(k, v));
-		System.out.println("Build finished with:");
+		System.out.println("Semantic analise finished with:");
 		System.out.println("\t " + errors + " errors;");
 		System.out.println("\t " + warnings + " warnings;");
 	}

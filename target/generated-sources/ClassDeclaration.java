@@ -18,17 +18,18 @@ public class ClassDeclaration {
 
 	public void addAtrib(String name, String className, String privacy) {
 		atribs.put(name, new AtribDeclaration(name, className, privacy));
-		//System.out.println("LOG: atribute of name : " + name + " className : "
-		//		+ className + " privacy : " + privacy);
+		// System.out.println("LOG: atribute of name : " + name +
+		// " className : "
+		// + className + " privacy : " + privacy);
 	}
 
 	public String getAtribClass(String name) {
-		if(!atribs.containsKey(name)){
+		if (!atribs.containsKey(name)) {
 			return "Object";
 		}
-		String cls= atribs.get(name).getClassName();
+		String cls = atribs.get(name).getClassName();
 		String[] str = cls.split("<|>");
-		return str[str.length-1];
+		return str[str.length - 1];
 	}
 
 	public String getAtribPrivacy(String name) {
@@ -37,12 +38,17 @@ public class ClassDeclaration {
 
 	public void addMethod(String name, String className, String privacy) {
 		methods.put(name, new MethodDeclaration(name, className, privacy));
-		//System.out.println("LOG: method of name : " + name + " className : "
-		//		+ className + " privacy : " + privacy);
+		// System.out.println("LOG: method of name : " + name + " className : "
+		// + className + " privacy : " + privacy);
 	}
 
 	public String getMethodReturnClass(String name) {
-		return methods.get(name).getClassReturnName();
+		if (methods.containsKey(name)) {
+
+			return methods.get(name).getClassReturnName();
+		} else {
+			return null;
+		}
 	}
 
 	public String getMethodPrivacy(String name) {
@@ -50,8 +56,8 @@ public class ClassDeclaration {
 	}
 
 	public boolean getIsArray(String name) {
-		String cls= atribs.get(name).getClassName();
+		String cls = atribs.get(name).getClassName();
 		String[] str = cls.split("<|>");
-		return str.length >1;
+		return str.length > 1;
 	}
 }
