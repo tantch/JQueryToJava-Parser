@@ -60,11 +60,13 @@ public class Starter {
 		MyListener extractor = new MyListener();
 
 		walker.walk(extractor, tree); // initiate walk of tree with listener
-
+		
 		for (Block block : representation) {
 			block.print();
 			block.processToJava();
 		}
+		
+		//aqui
 	}
 
 	public static void SyntaxError() {

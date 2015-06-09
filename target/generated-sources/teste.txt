@@ -34,7 +34,7 @@ public class Book{
 
 }
 public class Author{
-	private ArrayList<String> names;
+	private String name;
 }
 public class Test {
 //	public static long lexerTime = 0;
@@ -43,7 +43,7 @@ public class Test {
 	public static boolean gui = false;
 	public static boolean printTree = false;
 	public static boolean SLL = false;
-	public static ArrayList<Book> books;
+	public static ArrayList<Integer> filPub;
 	
 	public static Worker[] workers = new Worker[3];
 	static int windex = 0;
@@ -57,16 +57,16 @@ public class Test {
 	public static void main(String[] args,String nome,ArrayList<Book> libPub) {
 	
 		ArrayList<Book> lib = agrs[0];
-		ArrayList<Book> fil = new ArrayList<Book>();	
-		ArrayList<Book> aut;
+		ArrayList<Author> fil = new ArrayList<Author>();	
+		ArrayList<String> aut;
 		String autor;
 		@->JQ
 		in lib; 
 		out fil;
 		out aut;
-		fil = $(" lib "); 
+		fil = $(" lib > authors"); 
 		in fil;
-		aut = $(" fil > authors > names");
+		aut = $(" fil > name");
 		in libPub;
 		out filPub;
 		filPub = $("libPub > isbn");

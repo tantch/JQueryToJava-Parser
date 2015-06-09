@@ -23,6 +23,9 @@ public class ClassDeclaration {
 	}
 
 	public String getAtribClass(String name) {
+		if(!atribs.containsKey(name)){
+			return "Object";
+		}
 		String cls= atribs.get(name).getClassName();
 		String[] str = cls.split("<|>");
 		return str[str.length-1];
@@ -44,5 +47,11 @@ public class ClassDeclaration {
 
 	public String getMethodPrivacy(String name) {
 		return methods.get(name).getPrivacy();
+	}
+
+	public boolean getIsArray(String name) {
+		String cls= atribs.get(name).getClassName();
+		String[] str = cls.split("<|>");
+		return str.length >2;
 	}
 }

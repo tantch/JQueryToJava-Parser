@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyListener extends JavaParserBaseListener {
@@ -18,6 +17,12 @@ public class MyListener extends JavaParserBaseListener {
 		Starter.classes = new HashMap<String, ClassDeclaration>();
 		errors = 0;
 		warnings = 0;
+		Starter.classes.put("String",new ClassDeclaration("String"));
+		Starter.classes.put("Object",new ClassDeclaration("Object"));
+		Starter.classes.put("Integer",new ClassDeclaration("Integer"));
+		Starter.classes.put("Double",new ClassDeclaration("Double"));
+		Starter.classes.put("Float",new ClassDeclaration("Float"));
+		Starter.classes.put("Boolean",new ClassDeclaration("Boolean"));
 	}
 
 	private Block currentBlock() {
@@ -156,6 +161,7 @@ public class MyListener extends JavaParserBaseListener {
 		classVars = new HashMap<String, Variable>();
 		curClass = ctx.normalClassDeclaration().Identifier().getText();
 		Starter.classes.put(curClass, new ClassDeclaration(curClass));
+		System.out.println("Class cleanup for class: " + curClass);
 	};
 
 	@Override
@@ -177,7 +183,6 @@ public class MyListener extends JavaParserBaseListener {
 
 	@Override
 	public void enterMethodDeclaration(JavaParser.MethodDeclarationContext ctx) {
-		classVars = new HashMap<String, Variable>();
 		argumentVars = new HashMap<String, Variable>();
 		vars = new HashMap<String, InOutVar>();
 

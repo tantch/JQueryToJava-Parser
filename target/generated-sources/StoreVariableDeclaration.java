@@ -48,7 +48,7 @@ public class StoreVariableDeclaration extends Declaration {
 			}
 			var = new Variable(name, "ArrayList<?>", true);
 		} else {
-			str += "ArrayList<?> " + name + " = new ArrayList<?>();\n";
+			str += "ArrayList<Object> " + name + " = new ArrayList<Object>();\n";
 		}
 		str += "\n";
 		javaCode = str;
