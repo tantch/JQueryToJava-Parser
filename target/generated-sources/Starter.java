@@ -20,16 +20,21 @@ public class Starter {
 	static TreeViewer viewr;
 	static ArrayList<Block> representation;
 	static HashMap<String, ClassDeclaration> classes;
-	static int count=0;
+	static int count = 0;
 
 	private static boolean syntaxErrors = false;
 
 	public static void main(String[] args) throws IOException {
 
 		String inputFile = null;
-		if (args.length > 0) {
+		String outputFile=null;
+		if (args.length > 1) {
 			inputFile = args[0];
-			System.out.println(inputFile);
+			outputFile = args[1];
+		} else {
+			System.out.println("Wrong use of program. Should be:");
+			System.out.println("Starter <inputfile> <outputfile>");
+			System.exit(-1);
 		}
 		InputStream is = System.in;
 		if (inputFile != null)
@@ -65,23 +70,25 @@ public class Starter {
 		MyListener extractor = new MyListener();
 
 		walker.walk(extractor, tree); // initiate walk of tree with listener
-		try{
-		for (Block block : representation) {
-			//block.print();
-			block.processToJava();
+		try {
+			for (Block block : representation) {
+				// block.print();
+				block.processToJava();
+			}
+		} catch (NullPointerException e) {
+			System.out
+					.println("Error in processing java code because of previous error");
 		}
-		}catch(NullPointerException e){
-			System.out.println("Error in processing java code because of previous error");
-		}
-		
-		WriteToFile(inputFile, "Tester.java", representation);
+
+		WriteToFile(inputFile, outputFile, representation);
 	}
 
 	public static void SyntaxError() {
 		syntaxErrors = true;
 	}
-	
-	public static void WriteToFile(String srcfile, String destfile, ArrayList<Block> blocks){
+
+	public static void WriteToFile(String srcfile, String destfile,
+			ArrayList<Block> blocks) {
 		Scanner sc;
 		Scanner sc1 = null;
 		PrintWriter pw = null;
@@ -90,28 +97,28 @@ public class Starter {
 			pw = new PrintWriter(new File(destfile));
 			sc.useDelimiter("@->JQ");
 			String firstPart = sc.next();
-			//System.out.print(firstPart);
+			// System.out.print(firstPart);
 			pw.print(firstPart);
-			int i =0;
-			while(sc.hasNext()){
-			String codigomisto = sc.next();
-			
-			//codigo traduzido
-			ArrayList<Declaration> dec = blocks.get(i).getDeclarations();
-			for(Declaration decla : dec){
-				String declaration = decla.getJavaCode();
-				if(declaration!=null){
-				pw.print(decla.getJavaCode());
+			int i = 0;
+			while (sc.hasNext()) {
+				String codigomisto = sc.next();
+
+				// codigo traduzido
+				ArrayList<Declaration> dec = blocks.get(i).getDeclarations();
+				for (Declaration decla : dec) {
+					String declaration = decla.getJavaCode();
+					if (declaration != null) {
+						pw.print(decla.getJavaCode());
+					}
 				}
-			}
-			sc1 = new Scanner(codigomisto);
-			sc1.useDelimiter("@<-JQ");
-			sc1.next();
-			String next1 = sc1.next();
-			//System.out.println(next1);
-			pw.print(next1);
-			i++;
-			
+				sc1 = new Scanner(codigomisto);
+				sc1.useDelimiter("@<-JQ");
+				sc1.next();
+				String next1 = sc1.next();
+				// System.out.println(next1);
+				pw.print(next1);
+				i++;
+
 			}
 			sc.close();
 			sc1.close();
@@ -119,7 +126,7 @@ public class Starter {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 
 }
